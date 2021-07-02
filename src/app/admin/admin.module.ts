@@ -4,7 +4,7 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { CreatePageComponent } from './create-page/create-page.component';
 import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
 
-import { AppSharedModule } from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,7 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardPageComponent,
-        canActivate: [],
+        canActivate: [],  
       },
       {
         path: 'create',
@@ -48,7 +48,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AppSharedModule,
+    SharedModule,
     RouterModule.forChild(routes),
   ],
   exports: [RouterModule],

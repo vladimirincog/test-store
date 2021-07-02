@@ -1,4 +1,5 @@
-import { AppSharedModule } from './shared/shared.module';
+import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
+import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -19,12 +20,13 @@ import { BasketPageComponent } from './basket-page/basket-page.component';
     AppComponent,
     HomePageComponent,
     ProductPageComponent,
-    BasketPageComponent
+    BasketPageComponent,
+    MainLayoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppSharedModule,
+    SharedModule,
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
