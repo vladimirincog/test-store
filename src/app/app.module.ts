@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -12,12 +13,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { HomePageComponent } from './home-page/home-page.component';
-
 import { BasketPageComponent } from './basket-page/basket-page.component';
 import { AppComponent } from './app.component';
-
 import { LayoutModule } from '@angular/cdk/layout';
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
+
 
 
 @NgModule({
@@ -26,10 +26,11 @@ import { CatalogPageComponent } from './catalog-page/catalog-page.component';
     HomePageComponent,
     CatalogPageComponent,
     BasketPageComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
     StoreModule.forRoot(reducers, {

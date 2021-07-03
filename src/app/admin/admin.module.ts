@@ -4,10 +4,10 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { CreatePageComponent } from './create-page/create-page.component';
 import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
 
+import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [
@@ -19,17 +19,17 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardPageComponent,
-        canActivate: [],  
+        //canActivate: [],  
       },
       {
         path: 'create',
         component: CreatePageComponent,
-        canActivate: [],
+        //canActivate: [],
       },
       {
         path: 'post/:id/edit',
         component: EditPageComponent,
-        canActivate: [],
+        //canActivate: [],
       },
       { path: '', redirectTo: '/admin/login', pathMatch: 'full' },
     ],

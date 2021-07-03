@@ -3,21 +3,21 @@ import { BasketPageComponent } from './basket-page/basket-page.component';
 
 import { HomePageComponent } from './home-page/home-page.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 
 const routes: Routes = [
   {
-    path: '', 
+    path: '',
     component: MainLayoutComponent,
     children: [
-      {path: '', component: HomePageComponent},
-      {path: 'product/:id', component: ProductComponent}, //
-      {path: 'basket', component: BasketPageComponent},
-      {path: 'catalog', component: CatalogPageComponent},
-      {path: '', redirectTo: '/', pathMatch: 'full'}
-    ]
+      { path: '', component: HomePageComponent },
+      { path: 'product/:id', component: ProductComponent },
+      { path: 'basket', component: BasketPageComponent },
+      { path: 'catalog', component: CatalogPageComponent },
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+    ],
   },
   {
     path: 'admin',
@@ -27,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})], //
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
