@@ -8,17 +8,14 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './store/app.effects';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
+import { LayoutModule } from '@angular/cdk/layout';
+import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { BasketPageComponent } from './basket-page/basket-page.component';
 import { AppComponent } from './app.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { CatalogPageComponent } from './catalog-page/catalog-page.component';
-
-
 
 @NgModule({
   declarations: [
@@ -27,6 +24,7 @@ import { CatalogPageComponent } from './catalog-page/catalog-page.component';
     CatalogPageComponent,
     BasketPageComponent,
     MainLayoutComponent,
+   
   ],
   imports: [
     BrowserModule,
