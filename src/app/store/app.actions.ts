@@ -1,5 +1,7 @@
-import { createAction} from '@ngrx/store';
+import { Сategory } from 'app/shared/interfaces';
+import { createAction, props} from '@ngrx/store';
 
-export namespace NameActions {
-  export const action = createAction('ACTION');
+export namespace UserActions {
+  export const clickCategory = createAction('CLICK_CATEGORY');
+  export const getCategorySuccess = createAction('GET_DATA_SUCCESS', props<{category: any}>());//Сategory[]
 }

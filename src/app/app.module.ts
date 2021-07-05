@@ -24,7 +24,6 @@ import { AppComponent } from './app.component';
     CatalogPageComponent,
     BasketPageComponent,
     MainLayoutComponent,
-   
   ],
   imports: [
     BrowserModule,
@@ -32,13 +31,16 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     SharedModule,
     StoreModule.forRoot(reducers, {
-      metaReducers
+      metaReducers,
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
     EffectsModule.forRoot([AppEffects]),
-    LayoutModule
+    LayoutModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

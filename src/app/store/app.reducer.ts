@@ -1,21 +1,24 @@
+import { Product, Сategory } from 'app/shared/interfaces';
 import { createReducer, on } from '@ngrx/store';
-import { NameActions } from './app.actions';
+import { UserActions } from './app.actions';
 
 //Интеерфейс
-export interface name {
-
+export interface store {
+  category?: Сategory[];
+  basket?: Product[];
 }
 
 //Инициализация
-export const initionalState: name = {
+export const initionalState: store = {
+  
 };
 
 //Redusers
-export const nameReducer = createReducer(
+export const  UserReducers = createReducer(
   initionalState,
 
-  on(NameActions.action, (state) => ({
-    ...state
-  })),
-
+  on(UserActions.getCategorySuccess, (state, action) => ({
+    ...state,
+    category: action.category,
+  }))
 );

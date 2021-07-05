@@ -1,11 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { name } from './app.reducer';
+import { store } from './app.reducer';
 
-export namespace CounterSelector {
-  export const featureSelector = createFeatureSelector<name>('name');
+export namespace UserSelector {
+  export const featureSelector = createFeatureSelector<store>('category');
 
-  export const state = createSelector(
+  export const category = createSelector(
     featureSelector,
-    (state) => state
+    (state) => state.category
   );
 }
