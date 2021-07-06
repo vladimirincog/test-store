@@ -1,4 +1,4 @@
-import { Product, Сategory } from 'app/shared/interfaces';
+import { Product, Сategory } from 'app/store/interfaces';
 import { createReducer, on } from '@ngrx/store';
 import { UserActions } from './app.actions';
 

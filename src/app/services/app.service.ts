@@ -1,4 +1,4 @@
-import { Сategory } from 'app/shared/interfaces';
+import { Сategory } from 'app/store/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 

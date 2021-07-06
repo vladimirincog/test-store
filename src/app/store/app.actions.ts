@@ -1,4 +1,4 @@
-import { Сategory } from 'app/shared/interfaces';
+import { Сategory } from 'app/store/interfaces';
 import { createAction, props} from '@ngrx/store';
 
 export namespace UserActions {

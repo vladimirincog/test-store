@@ -1,8 +1,8 @@
-import { LoginPageComponent } from './login-page/login-page.component';
-import { EditPageComponent } from './edit-page/edit-page.component';
-import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
-import { CreatePageComponent } from './create-page/create-page.component';
-import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
+import { LoginComponent } from './pages/login/login.component';
+import { EditComponent } from './pages/edit/edit.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { CreateComponent } from './pages/create/create.component';
+import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
@@ -15,20 +15,20 @@ const routes: Routes = [
     path: '',
     component: AdminLayoutComponent,
     children: [
-      { path: 'login', component: LoginPageComponent },
+      { path: 'login', component: LoginComponent },
       {
         path: 'dashboard',
-        component: DashboardPageComponent,
+        component: DashboardComponent,
         //canActivate: [],  
       },
       {
         path: 'create',
-        component: CreatePageComponent,
+        component: CreateComponent,
         //canActivate: [],
       },
       {
         path: 'post/:id/edit',
-        component: EditPageComponent,
+        component: EditComponent,
         //canActivate: [],
       },
       { path: '', redirectTo: '/admin/login', pathMatch: 'full' },
@@ -39,10 +39,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AdminLayoutComponent,
-    CreatePageComponent,
-    DashboardPageComponent,
-    EditPageComponent,
-    LoginPageComponent,
+    CreateComponent,
+    DashboardComponent,
+    EditComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,

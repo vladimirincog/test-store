@@ -11,18 +11,18 @@ import { AppEffects } from './store/app.effects';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from '@angular/cdk/layout';
-import { CatalogPageComponent } from './catalog-page/catalog-page.component';
-import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { BasketPageComponent } from './basket-page/basket-page.component';
+import { CatalogComponent } from './pages/catalog/catalog.component';
+import { MainLayoutComponent } from './components/main-layout/main-layout.component';
+import { HomeComponent } from './pages/home/home.component';
+import { BasketComponent } from './pages/basket/basket.component';
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent,
-    CatalogPageComponent,
-    BasketPageComponent,
+    HomeComponent,
+    CatalogComponent,
+    BasketComponent,
     MainLayoutComponent,
   ],
   imports: [

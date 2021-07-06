@@ -1,7 +1,6 @@
-import { Сategory } from 'app/shared/interfaces';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AppService } from 'app/shared/app.service';
+import { AppService } from 'app/services/app.service';
 import { map, mergeMap } from 'rxjs/operators';
 import { UserActions } from './app.actions';
 
@@ -22,17 +21,4 @@ export class AppEffects {
       })
     );
   })
-
- /* getCategory$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UserActions.clickCategory),
-      mergeMap(() =>
-        this.AppService.getCategoty().pipe(
-          map((category) => {
-            return UserActions.getCategorySuccess({ category: category });
-          })
-        )
-      )
-    )
-  );*/
 }

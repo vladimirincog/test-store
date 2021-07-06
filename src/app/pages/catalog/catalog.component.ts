@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Сategory } from 'app/shared/interfaces';
+import { Сategory } from 'app/store/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -7,12 +7,13 @@ import { UserActions } from 'app/store/app.actions';
 import { UserSelector } from 'app/store/app.selectors';
 
 @Component({
-  selector: 'app-product-page',
-  templateUrl: './catalog-page.component.html',
-  styleUrls: ['./catalog-page.component.scss'],
+  selector: 'app-catalog',
+  templateUrl: './catalog.component.html',
+  styleUrls: ['./catalog.component.scss'],
 })
-export class CatalogPageComponent implements OnInit {
+export class CatalogComponent implements OnInit {
   cards: Observable<Сategory[]>;
+  searchStr: string;
 
   constructor(private http: HttpClient, private store: Store) {}
 
