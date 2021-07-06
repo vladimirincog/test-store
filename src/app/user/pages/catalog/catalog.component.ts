@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Сategory } from 'app/store/interfaces';
+import { Category } from 'app/store/app.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { UserSelector } from 'app/store/app.selectors';
   styleUrls: ['./catalog.component.scss'],
 })
 export class CatalogComponent implements OnInit {
-  cards: Observable<Сategory[]>;
+  cards: Observable<Category[]>;
   searchStr: string;
 
   constructor(private http: HttpClient, private store: Store) {}

@@ -1,4 +1,4 @@
-import { Сategory } from 'app/store/interfaces';
+import { Category } from 'app/store/app.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class AppService {
   constructor(private http: HttpClient) {}
 
-  getCategoty() {
-    return this.http.get<any>('http://localhost:3000/category'); //<Сategory[]>
+  getCategory() {
+    return this.http.get<Category[]>('http://localhost:3000/category');
   }
 }

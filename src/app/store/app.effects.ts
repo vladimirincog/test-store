@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AppService } from 'app/services/app.service';
+import { AppService } from 'app/shared/services/app.service';
 import { map, mergeMap } from 'rxjs/operators';
 import { UserActions } from './app.actions';
 
@@ -13,9 +13,9 @@ export class AppEffects {
     return this.actions$.pipe(
       ofType(UserActions.clickCategory),
       mergeMap(() => {
-        return this.AppService.getCategoty().pipe(
-          map((category) => {
-            return UserActions.getCategorySuccess({ category: category });
+        return this.AppService.getCategory().pipe(
+          map((categorys) => {
+            return UserActions.getCategorySuccess({ categorys: categorys });
           })
         );
       })

@@ -5,10 +5,10 @@ import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-layout',
-  templateUrl: './main-layout.component.html',
-  styleUrls: ['./main-layout.component.scss'],
+  templateUrl: './user-layout.component.html',
+  styleUrls: ['./user-layout.component.scss'],
 })
-export class MainLayoutComponent implements OnInit {
+export class UserLayoutComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver) {}
   ngOnInit(): void {}
 

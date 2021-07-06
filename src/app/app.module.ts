@@ -7,23 +7,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './store/app.effects';
-
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from '@angular/cdk/layout';
-import { CatalogComponent } from './pages/catalog/catalog.component';
-import { MainLayoutComponent } from './components/main-layout/main-layout.component';
-import { HomeComponent } from './pages/home/home.component';
-import { BasketComponent } from './pages/basket/basket.component';
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    CatalogComponent,
-    BasketComponent,
-    MainLayoutComponent,
   ],
   imports: [
     BrowserModule,

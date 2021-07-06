@@ -1,4 +1,4 @@
-import { UserReducers } from './app.reducer';
+import { Store, Reducers } from './app.reducer';
 import {
   ActionReducerMap,
   MetaReducer
@@ -6,11 +6,11 @@ import {
 import { environment } from '../../environments/environment';
 
 export interface State {
-  category: any;
+  store: Store;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  category: UserReducers
+  store: Reducers
 };
 
 
