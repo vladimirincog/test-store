@@ -8,10 +8,9 @@ import { UserActions } from './app.actions';
 export class AppEffects {
   constructor(private actions$: Actions, public AppService: AppService) {}
 
-
-  getCategory$ = createEffect( () => {
+  getCategory$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.clickCategory),
+      ofType(UserActions.clickCatalog),
       mergeMap(() => {
         return this.AppService.getCategory().pipe(
           map((categorys) => {
@@ -20,5 +19,18 @@ export class AppEffects {
         );
       })
     );
-  })
+  });
+
+  getProductsByCategoryId$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.clickCategory),
+      mergeMap((response) => {
+        return this.AppService.getProductsByCategoryId(response.categoryId).pipe(
+          map((products) => {
+            return UserActions.getProductsSuccess({ categoryProducts: products });
+          })
+        );
+      })
+    );
+  });
 }

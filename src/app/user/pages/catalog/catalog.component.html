@@ -1,20 +1,21 @@
-
-<!--https://material.angular.io/components/select/overview#select-custom-trigger  -->
-
 <div class="grid-container">
-    <mat-grid-list cols="2" rowHeight="300px">
-        <mat-grid-tile *ngFor="let card of cards | async " [colspan]="'1'" [rowspan]="'1'">
-            <mat-card class="dashboard-card">
-                <mat-card-header>
-                    <mat-card-title>
-                        {{card.name}}
-                    </mat-card-title>
-                </mat-card-header>
+    <mat-grid-list cols="3" rowHeight="350px">
+        <!--<mat-grid-tile *ngFor="let category of categorys$ | async " [colspan]="'1'" [rowspan]="'1'">
+            <mat-card class="dashboard-card" [routerLink]="['/', 'category', ':id']">
+                <h2>{{category.name}}</h2>
                 <mat-card-content class="dashboard-card-content">
-
-                    <img [src]=card.img alt="Нет изображения для данной категории товаров">
+                    <img [src]=category.img alt="Нет изображения для данной категории товаров">
                 </mat-card-content>
-                {{card.description}}
+                <p>{{category.description}}</p>
+            </mat-card>
+        </mat-grid-tile>-->
+        <mat-grid-tile *ngFor="let category of categorys$ | async " [colspan]="'1'" [rowspan]="'1'">
+            <mat-card class="dashboard-card" [routerLink]="['/', 'category', category.id]">
+                <h2>{{category.name}}</h2>
+                <mat-card-content class="dashboard-card-content">
+                    <img [src]=category.img alt="Нет изображения для данной категории товаров">
+                </mat-card-content>
+                <p>{{category.description}}</p>
             </mat-card>
         </mat-grid-tile>
     </mat-grid-list>

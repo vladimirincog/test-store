@@ -4,8 +4,13 @@ import { Store } from './app.reducer';
 export namespace UserSelector {
   export const featureSelector = createFeatureSelector<Store>('store');
 
-  export const category = createSelector(
+  export const categorys = createSelector(
     featureSelector,
     (state) => state.categorys
+  );
+
+  export const categoryProducts = createSelector(
+    featureSelector,
+    (state) => state.categoryProducts
   );
 }

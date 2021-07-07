@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserActions } from 'app/store/app.actions';
 import { UserSelector } from 'app/store/app.selectors';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-catalog',
@@ -12,17 +13,17 @@ import { UserSelector } from 'app/store/app.selectors';
   styleUrls: ['./catalog.component.scss'],
 })
 export class CatalogComponent implements OnInit {
-  cards: Observable<Category[]>;
+  categorys$: Observable<Category[]>;
   searchStr: string;
 
   constructor(private http: HttpClient, private store: Store) {}
 
   ngOnInit(): void {
     this.fetchCategory();
-    this.cards = this.store.select(UserSelector.category);
+    this.categorys$ = this.store.select(UserSelector.categorys);
   }
 
   fetchCategory(): void {
-    this.store.dispatch(UserActions.clickCategory());
+    this.store.dispatch(UserActions.clickCatalog());
   }
 }

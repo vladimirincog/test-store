@@ -4,19 +4,24 @@ import { UserActions } from './app.actions';
 
 export interface Store {
   categorys?: Category[];
+  categoryProducts?: Product[];
   basket?: Product[];
 }
 
-export const initionalState: Store = {
-  
+export const initialState: Store = {
+
 };
 
-//Redusers
-export const  Reducers = createReducer(
-  initionalState,
+//Reducers
+export const Reducers = createReducer(
+  initialState,
 
   on(UserActions.getCategorySuccess, (state, action) => ({
     ...state,
     categorys: action.categorys,
+  })),
+  on(UserActions.getProductsSuccess, (state, action) => ({
+    ...state,
+    categoryProducts: action.categoryProducts,
   }))
 );
