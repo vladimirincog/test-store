@@ -3,21 +3,24 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { CommonModule } from '@angular/common';
-import { ProductComponent } from './components/product/product.component';
+import { CardProductComponent } from './components/product/card-product.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
+  declarations: [CardProductComponent],
   imports: [
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
     CommonModule,
+    RouterModule
   ],
   exports: [
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
     CommonModule,
+    CardProductComponent
   ],
-  declarations: [ProductComponent],
 })
 export class SharedModule {}

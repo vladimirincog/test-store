@@ -5,7 +5,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { UserActions } from 'app/store/app.actions';
 import { Observable } from 'rxjs';
 import { Product } from 'app/store/app.model';
-import { AppService } from 'app/shared/services/app.service';
 
 @Component({
   selector: 'app-category',
@@ -16,9 +15,11 @@ export class CategoryComponent implements OnInit {
   categoryId: string;
   products$: Observable<Product[]>;
 
-  constructor(public route: ActivatedRoute, public store: Store) {}
+  constructor(public route: ActivatedRoute, public store: Store) {
+  }
 
   ngOnInit(): void {
+
     this.route.params.subscribe((params: Params) => {
       this.categoryId = params.id;
     });
@@ -30,6 +31,5 @@ export class CategoryComponent implements OnInit {
     );
 
     this.products$ = this.store.select(UserSelector.categoryProducts);
-    //this.products$.subscribe((response) => console.log(response));
   }
 }

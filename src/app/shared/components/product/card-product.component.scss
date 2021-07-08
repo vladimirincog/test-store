@@ -1,0 +1,29 @@
+.grid-container {
+    margin: 20px;
+  }
+  
+  .dashboard-card {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
+  
+  .dashboard-card-content {
+    text-align: center;
+  }
+  
+  img {
+    max-width: 40%;
+    max-height: 100%;
+  }
+  
+  h3,
+  p {
+    text-align: center;
+    max-height: 100%;
+    max-width: 100%;
+    margin: 10px;
+  }
+  

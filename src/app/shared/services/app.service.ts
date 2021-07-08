@@ -19,4 +19,8 @@ export class AppService {
       params: params.set('categoryId', categoryId),
     });
   }
+
+  getProductById(id: string): Observable<Product> {
+    return this.http.get<Product>(`http://localhost:3000/products/${id}`);
+  }
 }

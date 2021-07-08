@@ -1,0 +1,8 @@
+<mat-card class="dashboard-card" [routerLink]="['/', 'product', product.id]">
+    <h3>{{product.name}}</h3>
+    <mat-card-content class="dashboard-card-content">
+        <img [src]=product.img alt="Нет изображения для данной категории товаров">
+        <p>{{product.description}}</p>
+        <p>{{product.price | currency}}</p>
+    </mat-card-content>
+</mat-card>

@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'app/shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
@@ -6,9 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserLayoutComponent } from './components/user-layout/user-layout.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ProductComponent } from 'app/shared/components/product/product.component';
 import { BasketComponent } from './pages/basket/basket.component';
 import { CategoryComponent } from './pages/category/category.component';
+import { ProductComponent } from './pages/product/product.component';
 
 const routes: Routes = [{
   path: '',
@@ -30,6 +29,7 @@ const routes: Routes = [{
     CatalogComponent,
     HomeComponent,
     CategoryComponent,
+    ProductComponent
   ],
   imports: [SharedModule, RouterModule.forChild(routes),],
   exports: [RouterModule]
