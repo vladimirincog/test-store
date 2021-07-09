@@ -1,4 +1,4 @@
-import { Product } from './../../../store/app.model';
+import { Product } from 'app/store/app.model';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -36,6 +36,7 @@ export class ProductComponent implements OnInit {
     //если, кол-во в корзине + кол-во добавляемого > макс, то не добавляем и предупреждаем пользователя
     let product: Product;
     this.product$.subscribe((response) => (product = response));
+
     this.store.dispatch(
       UserActions.addBasket({
         product: { ...product, pieces: this.pieces.toString() },

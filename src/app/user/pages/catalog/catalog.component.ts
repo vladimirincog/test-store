@@ -5,6 +5,7 @@ import { EMPTY, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserActions } from 'app/store/app.actions';
 import { UserSelector } from 'app/store/app.selectors';
+import { BreakpointService } from 'app/shared/services/breakpoint.service';
 
 @Component({
   selector: 'app-catalog',
@@ -15,7 +16,11 @@ export class CatalogComponent implements OnInit {
   categorys$: Observable<Category[]>;
   searchStr: string;
 
-  constructor(private http: HttpClient, private store: Store) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store,
+    public breakpoint: BreakpointService
+  ) {}
 
   ngOnInit(): void {
     this.store.dispatch(UserActions.clickCatalog());

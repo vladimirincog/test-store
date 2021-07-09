@@ -1,6 +1,5 @@
 <div class="grid-container" *ngIf="categorys$ !== undefined; else loading">
-    <!---->
-    <mat-grid-list cols="3" rowHeight="350px">
+    <mat-grid-list [cols]="breakpoint.isMobile() ? 1 : 2" rowHeight="350px">
         <!--  <mat-grid-tile>
             <mat-card class="dashboard-card" [routerLink]="['/', 'category', ':id']">
                 <h2>Все товары</h2>
