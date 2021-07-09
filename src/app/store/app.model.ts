@@ -16,5 +16,6 @@ export interface Product {
   img?: string;
   name: string;
   description?: string;
+  pieces?: string
   price: string;
 }

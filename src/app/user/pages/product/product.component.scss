@@ -1,15 +1,28 @@
-.container{
-    width: 70%;
-    height: 70%;
-    margin: 3rem 4rem;
+.container {
+  width: 90%;
+  height: 70%;
+  margin: 3rem auto;
 }
 
-p, h2{
-    text-align: center;
-    margin: 5px;
+p,
+h2 {
+  text-align: center;
+  margin: 5px;
 }
 
-img{
-    max-width: 90%;
-    max-height: 90%;
+img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+button {
+  height: 40px;
+  max-width: 100%;
+}
+
+input {
+  height: 40px;
+  width: 70px;
+  text-align: center;
+  border-radius: 5px;
 }

@@ -14,6 +14,7 @@ import { UserSelector } from 'app/store/app.selectors';
 export class ProductComponent implements OnInit {
   productId: string;
   product$: Observable<Product>;
+  pieces: number = 1;
 
   constructor(public route: ActivatedRoute, public store: Store) {}
 
@@ -29,16 +30,24 @@ export class ProductComponent implements OnInit {
     );
 
     this.product$ = this.store.select(UserSelector.product);
-    this.product$.subscribe((response) => console.log(response));
   }
 
   addBasket() {
+    //если, кол-во в корзине + кол-во добавляемого > макс, то не добавляем и предупреждаем пользователя
     let product: Product;
     this.product$.subscribe((response) => (product = response));
     this.store.dispatch(
       UserActions.addBasket({
-        product: product,
+        product: { ...product, pieces: this.pieces.toString() },
       })
     );
+  }
+
+  increase(): void {
+    this.pieces++;
+  }
+
+  decrease(): void {
+    this.pieces--;
   }
 }

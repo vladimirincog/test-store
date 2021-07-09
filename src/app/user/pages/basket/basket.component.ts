@@ -7,18 +7,21 @@ import { UserSelector } from 'app/store/app.selectors';
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.scss']
+  styleUrls: ['./basket.component.scss'],
 })
 export class BasketComponent implements OnInit {
 
-
+  displayedColumns: string[] = ['Product', 'Pieces', 'Price', 'Sum', 'Delete'];
   products$: Observable<Product[]>;
 
-  constructor(public store: Store) { }
+  constructor(public store: Store) {}
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.products$ = this.store.select(UserSelector.basket);
-    this.products$.subscribe((response) => console.log(response))
+  }
+
+  deleteProduct(){
+    
   }
 
 }
