@@ -15,6 +15,7 @@ import { BreakpointService } from 'app/shared/services/breakpoint.service';
 export class CategoryComponent implements OnInit {
   categoryId: string;
   products$: Observable<Product[]>;
+  searchStr: string = '';
 
   constructor(
     public route: ActivatedRoute,
@@ -23,8 +24,6 @@ export class CategoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-
     this.route.params.subscribe((params: Params) => {
       this.categoryId = params.id;
     });

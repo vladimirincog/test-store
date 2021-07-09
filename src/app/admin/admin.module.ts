@@ -5,7 +5,7 @@ import { CreateComponent } from './pages/create/create.component';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 
 import { SharedModule } from '../shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -44,7 +44,6 @@ const routes: Routes = [
     LoginComponent,
   ],
   imports: [
-    FormsModule,
     ReactiveFormsModule,
     SharedModule,
     RouterModule.forChild(routes),

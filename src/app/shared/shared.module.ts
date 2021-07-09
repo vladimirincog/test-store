@@ -1,26 +1,30 @@
+import { SearchPipe } from './pipes/search.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { CommonModule } from '@angular/common';
 import { CardProductComponent } from './components/product/card-product.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [CardProductComponent],
+  declarations: [CardProductComponent, SearchPipe],
   imports: [
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
     CommonModule,
-    CardProductComponent
+    CardProductComponent,
+    SearchPipe,
+    FormsModule
   ],
 })
 export class SharedModule {}

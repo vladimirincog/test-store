@@ -1,7 +1,12 @@
+<div class="form-container">
+    <mat-form-field appearance="fill" >
+        <input matInput placeholder="Введите название товара" [(ngModel)]="searchStr">
+    </mat-form-field>
+</div>
 <div class="grid-container">
     <mat-grid-list [cols]="breakpoint.isMobile() ? 1 : 3" rowHeight="420px">
-        
-        <mat-grid-tile *ngFor="let product of products$ | async " [colspan]="'1'" [rowspan]="'1'">
+
+        <mat-grid-tile *ngFor="let product of products$ | async | searchProducts:searchStr" [colspan]="'1'" [rowspan]="'1'">
             <card-product [product]="product"></card-product>
         </mat-grid-tile>
     </mat-grid-list>
