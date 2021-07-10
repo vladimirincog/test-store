@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Product } from 'app/store/app.model';
 import { UserSelector } from 'app/store/app.selectors';
+import { UserActions } from 'app/store/app.actions';
 
 @Component({
   selector: 'app-basket',
@@ -20,8 +21,8 @@ export class BasketComponent implements OnInit {
     this.products$ = this.store.select(UserSelector.basket);
   }
 
-  deleteProduct(){
-    
+  removeProduct(id: string){
+    this.store.dispatch(UserActions.removeBasket({id: id}));
   }
 
 }

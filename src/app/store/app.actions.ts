@@ -12,4 +12,6 @@ export namespace UserActions {
   export const getProductSuccess = createAction('GET_PRODUCT_SUCCESS', props<{product: Product}>());
 
   export const addBasket = createAction('ADD_BASKET', props<{product: Product}>());
+
+  export const removeBasket = createAction('REMOVE_BASKET', props<{id: string}>());
 }

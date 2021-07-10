@@ -3,14 +3,19 @@ table {
   margin: 3rem auto;
 }
 
-.small{
+.small {
   width: 15%;
   text-align: center;
 }
 
-h1{
+h1 {
   font-size: 3rem;
   text-align: center;
   margin: 5rem;
-  color: #C0C0C0;
+  color: #c0c0c0;
+}
+
+mat-card{
+  min-width: 70%;
+  margin: 3rem auto;
 }

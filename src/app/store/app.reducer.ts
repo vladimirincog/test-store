@@ -30,7 +30,6 @@ export const Reducers = createReducer(
     product: action.product,
   })),
   on(UserActions.addBasket, (state, action) => {
-
     let prdIdx: number = state.basket.findIndex(
       (product) => product.id === action.product.id
     );
@@ -49,5 +48,16 @@ export const Reducers = createReducer(
         basket: [...state.basket, action.product],
       };
     }
+  }),
+
+  on(UserActions.removeBasket, (state, action) => {
+
+    let newBasket: Product[] = JSON.parse(JSON.stringify(state.basket)).filter(product => product.id !== action.id);
+
+
+    return {
+      ...state,
+      basket: newBasket,
+    };
   })
 );
