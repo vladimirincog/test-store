@@ -5,6 +5,7 @@ import { UserActions } from './app.actions';
 export interface Store {
   categorys?: Category[];
   categoryProducts?: Product[];
+  allProducts?: Product[];
   product?: Product;
   basket?: Product[];
 }
@@ -29,6 +30,12 @@ export const Reducers = createReducer(
     ...state,
     product: action.product,
   })),
+
+  on(UserActions.getAllProductsSuccess, (state, action) => ({
+    ...state,
+    allProducts: action.products,
+  })),
+
   on(UserActions.addBasket, (state, action) => {
     let prdIdx: number = state.basket.findIndex(
       (product) => product.id === action.product.id
@@ -36,7 +43,15 @@ export const Reducers = createReducer(
 
     if (prdIdx !== -1) {
       let newBasket: Product[] = JSON.parse(JSON.stringify(state.basket));
-      newBasket[prdIdx].pieces += action.product.pieces;
+
+      if (
+        newBasket[prdIdx].pieces + action.product.pieces <
+        action.maxProduct
+      ) {
+        newBasket[prdIdx].pieces += action.product.pieces;
+      } else {
+        newBasket[prdIdx].pieces = action.maxProduct;
+      }
 
       return {
         ...state,
@@ -51,9 +66,9 @@ export const Reducers = createReducer(
   }),
 
   on(UserActions.removeBasket, (state, action) => {
-
-    let newBasket: Product[] = JSON.parse(JSON.stringify(state.basket)).filter(product => product.id !== action.id);
-
+    let newBasket: Product[] = JSON.parse(JSON.stringify(state.basket)).filter(
+      (product) => product.id !== action.id
+    );
 
     return {
       ...state,

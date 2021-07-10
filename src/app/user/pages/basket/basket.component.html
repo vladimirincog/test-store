@@ -1,5 +1,6 @@
 <div class="container" *ngIf="(products$ | async).length !== 0; else empty">
 
+
   <table mat-table [dataSource]="products$ | async" class="mat-elevation-z8" [fixedLayout]='true'>
 
     <ng-container matColumnDef="Product">
@@ -31,10 +32,13 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
   </table>
+  <div class='footer'>
+    <h2>Итог: {{sum | currency}}</h2>
+    <button mat-raised-button color="primary"> Перейти к оформлению </button>
+  </div>
 </div>
 
 <ng-template #empty>
-  <h1>Корзина пуста</h1>
+  <h1 class="placeholder">Корзина пуста</h1>
 </ng-template>

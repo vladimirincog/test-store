@@ -14,11 +14,15 @@ export class BasketComponent implements OnInit {
 
   displayedColumns: string[] = ['Product', 'Pieces', 'Price', 'Sum', 'Delete'];
   products$: Observable<Product[]>;
+  sum: number = 0;
 
   constructor(public store: Store) {}
 
   ngOnInit(): void {
     this.products$ = this.store.select(UserSelector.basket);
+    this.products$.subscribe((products: Product[]) => {
+      products.forEach((product) => this.sum += +product.price * product.pieces)
+    })
   }
 
   removeProduct(id: string){

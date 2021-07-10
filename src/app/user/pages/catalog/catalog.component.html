@@ -1,14 +1,16 @@
 <div class="grid-container" *ngIf="categorys$ !== undefined; else loading">
+
     <mat-grid-list [cols]="breakpoint.isMobile() ? 1 : 2" rowHeight="350px">
-        <!--  <mat-grid-tile>
-            <mat-card class="dashboard-card" [routerLink]="['/', 'category', ':id']">
+        <mat-grid-tile>
+            <mat-card class="dashboard-card" [routerLink]="['/', 'category', 'all']">
                 <h2>Все товары</h2>
                 <mat-card-content class="dashboard-card-content">
-                    <img [src]="" alt="Нет изображения для данной категории товаров">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkjXRJzJlXZcea3mVcHFwpCh15End3umTliAjzNw61pQQAAHP3qP_pTRSvfj-CIfYk650&usqp=CAU"
+                        alt="Нет изображения для данной категории товаров">
                 </mat-card-content>
-                <p>Тут все товары</p>
+                <p>Здесь вы найдете все товары</p>
             </mat-card>
-        </mat-grid-tile> -->
+        </mat-grid-tile>
 
         <mat-grid-tile *ngFor="let category of categorys$ | async " [colspan]="'1'" [rowspan]="'1'">
             <mat-card class="dashboard-card" [routerLink]="['/', 'category', category.id]">

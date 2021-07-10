@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AppService } from 'app/shared/services/app.service';
 import { delay, map, mergeMap } from 'rxjs/operators';
-import { UserActions } from './app.actions';
+import { UserActions} from './app.actions';
 
 @Injectable()
 export class AppEffects {
@@ -15,6 +15,19 @@ export class AppEffects {
         return this.AppService.getCategory().pipe(
           map((categorys) => {
             return UserActions.getCategorySuccess({ categorys: categorys });
+          })
+        );
+      })
+    );
+  });
+
+  getAllProducts$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.clickAllProducts),
+      mergeMap(() => {
+        return this.AppService.getAllProducts().pipe(
+          map((products) => {
+            return UserActions.getAllProductsSuccess({ products: products });
           })
         );
       })

@@ -19,6 +19,11 @@ export namespace UserSelector {
     (state) => state.product
   );
 
+  export const allProducts = createSelector(
+    featureSelector,
+    (state) => state.allProducts
+  );
+
   export const basket = createSelector(
     featureSelector,
     (state) => state.basket

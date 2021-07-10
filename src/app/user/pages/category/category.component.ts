@@ -28,12 +28,18 @@ export class CategoryComponent implements OnInit {
       this.categoryId = params.id;
     });
 
-    this.store.dispatch(
-      UserActions.clickCategory({
-        categoryId: this.categoryId,
-      })
-    );
+    console.log(this.categoryId);
 
-    this.products$ = this.store.select(UserSelector.categoryProducts);
+    if (this.categoryId !== 'all') {
+      this.store.dispatch(
+        UserActions.clickCategory({
+          categoryId: this.categoryId,
+        })
+      );
+      this.products$ = this.store.select(UserSelector.categoryProducts);
+    } else {
+      this.store.dispatch(UserActions.clickAllProducts());
+      this.products$ = this.store.select(UserSelector.allProducts);
+    }
   }
 }

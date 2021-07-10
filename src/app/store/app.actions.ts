@@ -11,7 +11,10 @@ export namespace UserActions {
   export const clickProduct = createAction('CLICK_PRODUCT', props<{id: string}>());
   export const getProductSuccess = createAction('GET_PRODUCT_SUCCESS', props<{product: Product}>());
 
-  export const addBasket = createAction('ADD_BASKET', props<{product: Product}>());
+  export const clickAllProducts = createAction('CLICK_ALL_PRODUCTS');
+  export const getAllProductsSuccess = createAction('GET_ALL_PRODUCTS_SUCCESS', props<{products: Product[]}>());
+
+  export const addBasket = createAction('ADD_BASKET', props<{product: Product, maxProduct: number}>());
 
   export const removeBasket = createAction('REMOVE_BASKET', props<{id: string}>());
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'app/store/app.model';
-import { HttpClient } from '@angular/common/http';
-import { EMPTY, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserActions } from 'app/store/app.actions';
 import { UserSelector } from 'app/store/app.selectors';
@@ -16,11 +15,7 @@ export class CatalogComponent implements OnInit {
   categorys$: Observable<Category[]>;
   searchStr: string;
 
-  constructor(
-    private http: HttpClient,
-    private store: Store,
-    public breakpoint: BreakpointService
-  ) {}
+  constructor(private store: Store, public breakpoint: BreakpointService) {}
 
   ngOnInit(): void {
     this.store.dispatch(UserActions.clickCatalog());

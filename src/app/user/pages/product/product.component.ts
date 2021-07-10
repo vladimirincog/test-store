@@ -1,5 +1,5 @@
 import { Product } from 'app/store/app.model';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UserActions } from 'app/store/app.actions';
@@ -40,6 +40,7 @@ export class ProductComponent implements OnInit {
     this.store.dispatch(
       UserActions.addBasket({
         product: { ...product, pieces: this.pieces },
+        maxProduct: product.pieces,
       })
     );
   }

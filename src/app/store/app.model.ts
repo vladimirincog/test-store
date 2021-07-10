@@ -16,6 +16,10 @@ export interface Product {
   img?: string;
   name: string;
   description?: string;
-  pieces?: number
+  pieces?: number;
   price: string;
+}
+
+export interface Billbord {
+  img?: string[];
 }
