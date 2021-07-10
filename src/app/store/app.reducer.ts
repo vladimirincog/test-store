@@ -29,8 +29,25 @@ export const Reducers = createReducer(
     ...state,
     product: action.product,
   })),
-  on(UserActions.addBasket, (state, action) => ({
-    ...state,
-    basket: [...state.basket, action.product],
-  }))
+  on(UserActions.addBasket, (state, action) => {
+
+    let prdIdx: number = state.basket.findIndex(
+      (product) => product.id === action.product.id
+    );
+
+    if (prdIdx !== -1) {
+      let newBasket: Product[] = JSON.parse(JSON.stringify(state.basket));
+      newBasket[prdIdx].pieces += action.product.pieces;
+
+      return {
+        ...state,
+        basket: newBasket,
+      };
+    } else {
+      return {
+        ...state,
+        basket: [...state.basket, action.product],
+      };
+    }
+  })
 );

@@ -39,7 +39,7 @@ export class ProductComponent implements OnInit {
 
     this.store.dispatch(
       UserActions.addBasket({
-        product: { ...product, pieces: this.pieces.toString() },
+        product: { ...product, pieces: this.pieces },
       })
     );
   }
