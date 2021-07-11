@@ -15,14 +15,12 @@
   top: 0;
   z-index: 1;
 }
-
-
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
+.header {
   width: 100%;
-}
-
-.example-full-width {
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  span:hover,
+  mat-icon:hover{
+    cursor: pointer;
+  }
 }

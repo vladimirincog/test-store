@@ -26,7 +26,10 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Тест-магазин</span>
+      <div class="header">
+        <span [routerLink]="'/'">Тест-магазин</span>
+        <mat-icon [routerLink]="'basket'" [matBadge]="amountBasket? amountBasket : null" matBadgePosition="before" matBadgeColor="accent">shopping_cart</mat-icon>
+      </div>
     </mat-toolbar>
 
     <!-- Add Content Here -->

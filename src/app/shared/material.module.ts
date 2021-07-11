@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import {MatTableModule} from '@angular/material/table';
     MatCardModule,
     MatGridListModule,
     MatProgressSpinnerModule,
-    MatTableModule
+    MatTableModule,
+    MatBadgeModule
   ],
   exports: [
     MatSliderModule,
@@ -47,7 +49,8 @@ import {MatTableModule} from '@angular/material/table';
     MatCardModule,
     MatGridListModule,
     MatProgressSpinnerModule,
-    MatTableModule
+    MatTableModule,
+    MatBadgeModule
   ],
 })
 export class MaterialModule {}
