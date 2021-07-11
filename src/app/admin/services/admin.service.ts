@@ -7,7 +7,7 @@ export class AdminService {
   
   constructor(private http: HttpClient) {}
 
-  deleteProductById(id: string): Observable<void> {
+  removeProductById(id: string): Observable<void> {
     return this.http.delete<void>(`http://localhost:3000/products/${id}`);
   }
 }

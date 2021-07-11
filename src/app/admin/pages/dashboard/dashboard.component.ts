@@ -1,3 +1,4 @@
+import { AdminService } from './../../services/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AdminActions } from 'app/store/app.actions';
@@ -22,7 +23,7 @@ export class DashboardComponent implements OnInit {
   products$: Observable<Product[]>;
   searchStr: string = '';
 
-  constructor(public store: Store) {}
+  constructor(public store: Store, public adminService: AdminService) {}
 
   ngOnInit(): void {
     this.store.dispatch(AdminActions.initDashboard());
@@ -31,5 +32,7 @@ export class DashboardComponent implements OnInit {
 
   editProduct(id: string) {}
 
-  removeProduct(id: string) {}
+  removeProduct(id: string): void {
+    this.adminService.removeProductById(id).subscribe();
+  }
 }
