@@ -1,0 +1,30 @@
+$padding-top: 10px;
+
+mat-form-field {
+  width: 100%;
+}
+
+table {
+  min-width: 80%;
+  max-width: 90%;
+  margin: auto;
+  td {
+    padding-top: $padding-top;
+  }
+  .small {
+    width: 12%;
+    text-align: center;
+    margin: 0;
+  }
+  mat-icon:hover {
+    zoom: 1.1;
+    cursor: pointer;
+  }
+  img {
+    width: 30px;
+  }
+  p {
+    padding-top: $padding-top;
+    text-align: justify;
+  }
+}

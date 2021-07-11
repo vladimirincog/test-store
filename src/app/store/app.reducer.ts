@@ -1,6 +1,6 @@
 import { Product, Category } from 'app/store/app.model';
 import { createReducer, on } from '@ngrx/store';
-import { UserActions } from './app.actions';
+import { GlobalActions, UserActions } from './app.actions';
 
 export interface Store {
   categorys?: Category[];
@@ -18,20 +18,20 @@ export const initialState: Store = {
 export const Reducers = createReducer(
   initialState,
 
-  on(UserActions.getCategorySuccess, (state, action) => ({
+  on(GlobalActions.getCategorySuccess, (state, action) => ({
     ...state,
     categorys: action.categorys,
   })),
-  on(UserActions.getProductsSuccess, (state, action) => ({
+  on(GlobalActions.getProductsByCategorySuccess, (state, action) => ({
     ...state,
     categoryProducts: action.categoryProducts,
   })),
-  on(UserActions.getProductSuccess, (state, action) => ({
+  on(GlobalActions.getProductSuccess, (state, action) => ({
     ...state,
     product: action.product,
   })),
 
-  on(UserActions.getAllProductsSuccess, (state, action) => ({
+  on(GlobalActions.getAllProductsSuccess, (state, action) => ({
     ...state,
     allProducts: action.products,
   })),

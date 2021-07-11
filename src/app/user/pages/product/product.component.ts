@@ -1,10 +1,10 @@
 import { Product } from 'app/store/app.model';
-import { Observable, Observer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UserActions } from 'app/store/app.actions';
 import { Store } from '@ngrx/store';
-import { UserSelector } from 'app/store/app.selectors';
+import { GlobalSelectors } from 'app/store/app.selectors';
 
 @Component({
   selector: 'app-product',
@@ -29,7 +29,7 @@ export class ProductComponent implements OnInit {
       })
     );
 
-    this.product$ = this.store.select(UserSelector.product);
+    this.product$ = this.store.select(GlobalSelectors.product);
   }
 
   addBasket() {

@@ -3,7 +3,7 @@ import { Category } from 'app/store/app.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserActions } from 'app/store/app.actions';
-import { UserSelector } from 'app/store/app.selectors';
+import { GlobalSelectors } from 'app/store/app.selectors';
 import { BreakpointService } from 'app/shared/services/breakpoint.service';
 
 @Component({
@@ -19,6 +19,6 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(UserActions.clickCatalog());
-    this.categorys$ = this.store.select(UserSelector.categorys);
+    this.categorys$ = this.store.select(GlobalSelectors.categorys);
   }
 }

@@ -1,4 +1,4 @@
-import { UserSelector } from 'app/store/app.selectors';
+import { GlobalSelectors} from 'app/store/app.selectors';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -28,18 +28,16 @@ export class CategoryComponent implements OnInit {
       this.categoryId = params.id;
     });
 
-    console.log(this.categoryId);
-
     if (this.categoryId !== 'all') {
       this.store.dispatch(
         UserActions.clickCategory({
           categoryId: this.categoryId,
         })
       );
-      this.products$ = this.store.select(UserSelector.categoryProducts);
+      this.products$ = this.store.select(GlobalSelectors.categoryProducts);
     } else {
       this.store.dispatch(UserActions.clickAllProducts());
-      this.products$ = this.store.select(UserSelector.allProducts);
+      this.products$ = this.store.select(GlobalSelectors.allProducts);
     }
   }
 }

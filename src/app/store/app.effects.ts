@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AppService } from 'app/shared/services/app.service';
 import { delay, map, mergeMap } from 'rxjs/operators';
-import { UserActions} from './app.actions';
+import { AdminActions, GlobalActions, UserActions} from './app.actions';
 
 @Injectable()
 export class AppEffects {
@@ -14,7 +14,7 @@ export class AppEffects {
       mergeMap(() => {
         return this.AppService.getCategory().pipe(
           map((categorys) => {
-            return UserActions.getCategorySuccess({ categorys: categorys });
+            return GlobalActions.getCategorySuccess({ categorys: categorys });
           })
         );
       })
@@ -23,11 +23,11 @@ export class AppEffects {
 
   getAllProducts$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.clickAllProducts),
+      ofType(UserActions.clickAllProducts, AdminActions.initDashboard),
       mergeMap(() => {
         return this.AppService.getAllProducts().pipe(
           map((products) => {
-            return UserActions.getAllProductsSuccess({ products: products });
+            return GlobalActions.getAllProductsSuccess({ products: products });
           })
         );
       })
@@ -40,7 +40,7 @@ export class AppEffects {
       mergeMap((response) => {
         return this.AppService.getProductsByCategoryId(response.categoryId).pipe(
           map((products) => {
-            return UserActions.getProductsSuccess({ categoryProducts: products });
+            return GlobalActions.getProductsByCategorySuccess({ categoryProducts: products });
           })
         );
       })
@@ -53,7 +53,7 @@ export class AppEffects {
       mergeMap((response) => {
         return this.AppService.getProductById(response.id).pipe(
           map((product) => {
-            return UserActions.getProductSuccess({product: product})
+            return GlobalActions.getProductSuccess({product: product})
           })
         )
       })
