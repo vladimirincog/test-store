@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from 'app/store/app.model';
 
 @Component({
@@ -7,7 +8,7 @@ import { Product } from 'app/store/app.model';
   styleUrls: ['./card-product.component.scss'],
 })
 export class CardProductComponent implements OnInit {
-  constructor() {}
+  constructor(public router: Router) {}
 
   @Input() product: Product;
 

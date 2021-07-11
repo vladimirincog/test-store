@@ -1,7 +1,7 @@
 import { Product } from 'app/store/app.model';
 import { Observable, Observer } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UserActions } from 'app/store/app.actions';
 import { Store } from '@ngrx/store';
 import { UserSelector } from 'app/store/app.selectors';
@@ -16,7 +16,7 @@ export class ProductComponent implements OnInit {
   product$: Observable<Product>;
   pieces: number = 1;
 
-  constructor(public route: ActivatedRoute, public store: Store) {}
+  constructor(public route: ActivatedRoute, public store: Store, public router: Router) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -51,5 +51,10 @@ export class ProductComponent implements OnInit {
 
   decrease(): void {
     this.pieces--;
+  }
+
+  backUrl(){
+    const { redirect } = window.history.state;
+    this.router.navigateByUrl(redirect);
   }
 }

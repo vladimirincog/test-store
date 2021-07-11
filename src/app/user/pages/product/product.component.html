@@ -6,7 +6,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile [colspan]="2" [rowspan]="1">
-            <button mat-button [routerLink]="['/', 'category', product.categoryId]">
+            <button mat-button (click)='backUrl()'>
                 <mat-icon>arrow_back_ios</mat-icon> Назад
             </button>
         </mat-grid-tile>
