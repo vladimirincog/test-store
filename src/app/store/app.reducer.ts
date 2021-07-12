@@ -12,13 +12,15 @@ export interface Store {
 
 export const initialState: Store = {
   basket: new Array<Product>(),
+  categoryProducts: new Array<Product>(),
+  allProducts: new Array<Product>(),
 };
 
 //Reducers
 export const Reducers = createReducer(
   initialState,
 
-  on(GlobalActions.getCategorySuccess, (state, action) => ({
+  on(GlobalActions.getCategoriesSuccess, (state, action) => ({
     ...state,
     categories: action.categories,
   })),

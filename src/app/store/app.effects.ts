@@ -7,19 +7,15 @@ import { AdminActions, GlobalActions, UserActions } from './app.actions';
 
 @Injectable()
 export class AppEffects {
-  constructor(
-    private actions$: Actions,
-    public AppService: AppService,
-    public AdminService: AdminService
-  ) {}
+  constructor(private actions$: Actions, public AppService: AppService, public AdminService: AdminService) {}
 
   getCategory$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.clickCatalog),
+      ofType(GlobalActions.getCategories),
       mergeMap(() => {
         return this.AppService.getCategory().pipe(
           map((categories) => {
-            return GlobalActions.getCategorySuccess({ categories: categories });
+            return GlobalActions.getCategoriesSuccess({ categories: categories });
           })
         );
       })

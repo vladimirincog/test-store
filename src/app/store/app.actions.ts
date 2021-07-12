@@ -2,7 +2,10 @@ import { Category, Product } from 'app/store/app.model';
 import { createAction, props} from '@ngrx/store';
 
 export namespace GlobalActions{
-  export const getCategorySuccess = createAction('GET_CATEGORY_SUCCESS', props<{categories: Category[]}>());
+
+  export const getCategories = createAction('GET_CATEGORIES');
+
+  export const getCategoriesSuccess = createAction('GET_CATEGORIES_SUCCESS', props<{categories: Category[]}>());
   
   export const getProductsByCategorySuccess = createAction('GET_CATEGORY_SUCCESS', props<{categoryProducts: Product[]}>());
 
@@ -12,7 +15,6 @@ export namespace GlobalActions{
 }
 
 export namespace UserActions {
-  export const clickCatalog = createAction('CLICK_CATALOG');
 
   export const clickCategory = createAction('CLICK_CATEGORY', props<{categoryId: string}>());
 
