@@ -4,9 +4,9 @@ import { Store } from './app.reducer';
 export const featureSelector = createFeatureSelector<Store>('store');
 
 export namespace GlobalSelectors {
-  export const categorys = createSelector(
+  export const categories = createSelector(
     featureSelector,
-    (state) => state.categorys
+    (state) => state.categories
   );
   export const categoryProducts = createSelector(
     featureSelector,

@@ -2,7 +2,7 @@ import { Category, Product } from 'app/store/app.model';
 import { createAction, props} from '@ngrx/store';
 
 export namespace GlobalActions{
-  export const getCategorySuccess = createAction('GET_CATEGORY_SUCCESS', props<{categorys: Category[]}>());
+  export const getCategorySuccess = createAction('GET_CATEGORY_SUCCESS', props<{categories: Category[]}>());
   
   export const getProductsByCategorySuccess = createAction('GET_CATEGORY_SUCCESS', props<{categoryProducts: Product[]}>());
 
@@ -26,5 +26,9 @@ export namespace UserActions {
 }
 
 export namespace AdminActions{
-  export const initDashboard = createAction('INIT_DASHBOARD')
+  export const initDashboard = createAction('INIT_DASHBOARD');
+
+  export const removeProduct = createAction('REMOVE_PRODUCT', props<{id: string}>());
+
+  export const removeProductSuccess = createAction('REMOVE_PRODUCT_SUCCESS', props<{id: string}>()); //нет Reducer
 }

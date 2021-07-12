@@ -12,13 +12,13 @@ import { BreakpointService } from 'app/shared/services/breakpoint.service';
   styleUrls: ['./catalog.component.scss'],
 })
 export class CatalogComponent implements OnInit {
-  categorys$: Observable<Category[]>;
+  categories$: Observable<Category[]>;
   searchStr: string;
 
   constructor(private store: Store, public breakpoint: BreakpointService) {}
 
   ngOnInit(): void {
     this.store.dispatch(UserActions.clickCatalog());
-    this.categorys$ = this.store.select(GlobalSelectors.categorys);
+    this.categories$ = this.store.select(GlobalSelectors.categories);
   }
 }

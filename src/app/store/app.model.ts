@@ -20,6 +20,6 @@ export interface Product {
   price: string;
 }
 
-export interface Billbord {
+export interface Billboard {
   img?: string[];
 }

@@ -8,7 +8,6 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AdminService } from './services/admin.service';
 
 const routes: Routes = [
   {
@@ -19,7 +18,7 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        //canActivate: [],  
+        //canActivate: [],
       },
       {
         path: 'create',
@@ -44,12 +43,8 @@ const routes: Routes = [
     EditComponent,
     LoginComponent,
   ],
-  imports: [
-    ReactiveFormsModule,
-    SharedModule,
-    RouterModule.forChild(routes),
-  ],
+  imports: [ReactiveFormsModule, SharedModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [AdminService],
+  providers: [],
 })
 export class AdminModule {}

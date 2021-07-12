@@ -33,6 +33,6 @@ export class DashboardComponent implements OnInit {
   editProduct(id: string) {}
 
   removeProduct(id: string): void {
-    this.adminService.removeProductById(id).subscribe();
+    this.store.dispatch(AdminActions.removeProduct({ id: id }));
   }
 }

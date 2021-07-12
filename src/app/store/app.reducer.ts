@@ -3,7 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import { GlobalActions, UserActions } from './app.actions';
 
 export interface Store {
-  categorys?: Category[];
+  categories?: Category[];
   categoryProducts?: Product[];
   allProducts?: Product[];
   product?: Product;
@@ -20,7 +20,7 @@ export const Reducers = createReducer(
 
   on(GlobalActions.getCategorySuccess, (state, action) => ({
     ...state,
-    categorys: action.categorys,
+    categories: action.categories,
   })),
   on(GlobalActions.getProductsByCategorySuccess, (state, action) => ({
     ...state,
