@@ -1,1 +1,78 @@
-<p>edit-page works!</p>
+<div class="container" *ngIf="product !== undefined; else loading">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+      <h2>Изменить товар</h2>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Название" formControlName="name">
+              <mat-error *ngIf="form.controls['name'].hasError('required')">
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Цена" formControlName="price">
+              <mat-error *ngIf="form.controls['price'].hasError('required')">
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Количество" formControlName="pieces">
+              <mat-error *ngIf="form.controls['pieces'].hasError('required')">
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <textarea matInput placeholder="Описание" formControlName="description"></textarea>
+              <mat-error *ngIf="form.controls['description'].hasError('required')">
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Ссылка на изображение" formControlName="img">
+              <mat-error *ngIf="form.controls['img'].hasError('required')">
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Категория" formControlName="categories">
+                <mat-option *ngFor="let category of categories" [value]="category.name">
+                  {{ category.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.controls['categories'].hasError('required')">
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Сохранить</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

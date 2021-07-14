@@ -26,7 +26,7 @@ const routes: Routes = [
         //canActivate: [],
       },
       {
-        path: 'post/:id/edit',
+        path: 'edit/:id',
         component: EditComponent,
         //canActivate: [],
       },

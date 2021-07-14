@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit(form, formDirective)" #formDirective="ngForm" >
     <mat-card class="shipping-card">
       <h2>Добавить товар</h2>
       <mat-card-content>

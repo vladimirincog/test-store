@@ -1,9 +1,14 @@
 import { AdminService } from '../../services/admin.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { GlobalActions } from 'app/store/app.actions';
-import { Category, Product } from 'app/store/app.model';
+import { GlobalActions, AdminActions } from 'app/store/app.actions';
+import { ICategory, IProduct } from 'app/store/app.model';
 import { GlobalSelectors } from 'app/store/app.selectors';
 
 @Component({
@@ -12,7 +17,7 @@ import { GlobalSelectors } from 'app/store/app.selectors';
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
-  categories: Category[];
+  categories: ICategory[];
 
   form: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -32,8 +37,8 @@ export class CreateComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    const product: Product = {
+  onSubmit(form: FormGroup, formDirective: FormGroupDirective): void {
+    const product: IProduct = {
       categoryId: this.categories.find((category) => {
         return category.name === this.form.get('categories').value;
       }).id,
@@ -44,6 +49,8 @@ export class CreateComponent implements OnInit {
       price: this.form.get('price').value,
     };
 
-    this.adminService.createProduct(product).subscribe((response: Product) => console.log(response));
+    this.store.dispatch(AdminActions.createProduct({ product: product }));
+    formDirective.resetForm();
+    this.form.reset();
   }
 }

@@ -1,16 +1,16 @@
-export interface Administrator {
+export interface IAdministrator {
   email: string;
   password: string;
 }
 
-export interface Category {
+export interface ICategory {
   id?: string;
   img?: string;
   name: string;
   description: string;
 }
 
-export interface Product {
+export interface IProduct {
   id?: string;
   categoryId: string;
   img?: string;
@@ -20,11 +20,11 @@ export interface Product {
   price: number;
 }
 
-export interface Billboard {
+export interface IBillboard {
   img?: string[];
 }
 
-export interface Client {
+export interface IClient {
   firstName: string;
   surname: string;
   address: string;
@@ -32,7 +32,7 @@ export interface Client {
   email?: string;
 }
 
-export interface Order {
-  products: Product[];
-  client: Client;
+export interface IOrder {
+  products: IProduct[];
+  client: IClient;
 }

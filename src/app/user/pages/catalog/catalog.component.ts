@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from 'app/store/app.model';
+import { ICategory } from 'app/store/app.model';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { GlobalActions } from 'app/store/app.actions';
@@ -12,7 +12,7 @@ import { BreakpointService } from 'app/shared/services/breakpoint.service';
   styleUrls: ['./catalog.component.scss'],
 })
 export class CatalogComponent implements OnInit {
-  categories$: Observable<Category[]>;
+  categories$: Observable<ICategory[]>;
   searchStr: string;
 
   constructor(private store: Store, public breakpoint: BreakpointService) {}

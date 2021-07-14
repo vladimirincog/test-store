@@ -7,7 +7,11 @@ import { AdminActions, GlobalActions, UserActions } from './app.actions';
 
 @Injectable()
 export class AppEffects {
-  constructor(private actions$: Actions, public AppService: AppService, public AdminService: AdminService) {}
+  constructor(
+    private actions$: Actions,
+    public AppService: AppService,
+    public AdminService: AdminService
+  ) {}
 
   getCategory$ = createEffect(() => {
     return this.actions$.pipe(
@@ -15,7 +19,9 @@ export class AppEffects {
       mergeMap(() => {
         return this.AppService.getCategory().pipe(
           map((categories) => {
-            return GlobalActions.getCategoriesSuccess({ categories: categories });
+            return GlobalActions.getCategoriesSuccess({
+              categories: categories,
+            });
           })
         );
       })
@@ -54,11 +60,11 @@ export class AppEffects {
 
   getProductById$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.clickProduct),
+      ofType(GlobalActions.getProductById),
       mergeMap((response) => {
         return this.AppService.getProductById(response.id).pipe(
           map((product) => {
-            return GlobalActions.getProductSuccess({ product: product });
+            return GlobalActions.getProductByIdSuccess({ product: product });
           })
         );
       })
@@ -72,6 +78,19 @@ export class AppEffects {
         return this.AdminService.removeProductById(response.id).pipe(
           map((id) => {
             return AdminActions.removeProductSuccess({ id: id });
+          })
+        );
+      })
+    );
+  });
+
+  createProduct$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AdminActions.createProduct),
+      mergeMap((response) => {
+        return this.AdminService.createProduct(response.product).pipe(
+          map((product) => {
+            return AdminActions.createProductSuccess({ product: product });
           })
         );
       })

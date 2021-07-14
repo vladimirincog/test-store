@@ -1,8 +1,8 @@
-import { Product } from 'app/store/app.model';
+import { IProduct } from 'app/store/app.model';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { UserActions } from 'app/store/app.actions';
+import { UserActions, GlobalActions } from 'app/store/app.actions';
 import { Store } from '@ngrx/store';
 import { GlobalSelectors } from 'app/store/app.selectors';
 
@@ -13,7 +13,7 @@ import { GlobalSelectors } from 'app/store/app.selectors';
 })
 export class ProductComponent implements OnInit {
   productId: string;
-  product$: Observable<Product>;
+  product$: Observable<IProduct>;
   pieces: number = 1;
 
   constructor(public route: ActivatedRoute, public store: Store, public router: Router) {}
@@ -24,7 +24,7 @@ export class ProductComponent implements OnInit {
     });
 
     this.store.dispatch(
-      UserActions.clickProduct({
+      GlobalActions.getProductById({
         id: this.productId,
       })
     );
@@ -34,7 +34,7 @@ export class ProductComponent implements OnInit {
 
   addBasket() {
     //если, кол-во в корзине + кол-во добавляемого > макс, то не добавляем и предупреждаем пользователя
-    let product: Product;
+    let product: IProduct;
     this.product$.subscribe((response) => (product = response));
 
     this.store.dispatch(

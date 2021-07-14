@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UserActions } from 'app/store/app.actions';
 import { Observable } from 'rxjs';
-import { Product } from 'app/store/app.model';
+import { IProduct } from 'app/store/app.model';
 import { BreakpointService } from 'app/shared/services/breakpoint.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { BreakpointService } from 'app/shared/services/breakpoint.service';
 })
 export class CategoryComponent implements OnInit {
   categoryId: string;
-  products$: Observable<Product[]>;
+  products$: Observable<IProduct[]>;
   searchStr: string = '';
 
   constructor(

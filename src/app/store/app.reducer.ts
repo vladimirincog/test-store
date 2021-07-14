@@ -1,19 +1,19 @@
-import { Product, Category } from 'app/store/app.model';
+import { IProduct, ICategory } from 'app/store/app.model';
 import { createReducer, on } from '@ngrx/store';
-import { GlobalActions, UserActions } from './app.actions';
+import { AdminActions, GlobalActions, UserActions } from './app.actions';
 
 export interface Store {
-  categories?: Category[];
-  categoryProducts?: Product[];
-  allProducts?: Product[];
-  product?: Product;
-  basket?: Product[];
+  categories?: ICategory[];
+  categoryProducts?: IProduct[];
+  allProducts?: IProduct[];
+  product?: IProduct;
+  basket?: IProduct[];
 }
 
 export const initialState: Store = {
-  basket: new Array<Product>(),
-  categoryProducts: new Array<Product>(),
-  allProducts: new Array<Product>(),
+  basket: new Array<IProduct>(),
+  categoryProducts: new Array<IProduct>(),
+  allProducts: new Array<IProduct>(),
 };
 
 //Reducers
@@ -28,7 +28,7 @@ export const Reducers = createReducer(
     ...state,
     categoryProducts: action.categoryProducts,
   })),
-  on(GlobalActions.getProductSuccess, (state, action) => ({
+  on(GlobalActions.getProductByIdSuccess, (state, action) => ({
     ...state,
     product: action.product,
   })),
@@ -44,7 +44,7 @@ export const Reducers = createReducer(
     );
 
     if (prdIdx !== -1) {
-      let newBasket: Product[] = JSON.parse(JSON.stringify(state.basket));
+      let newBasket: IProduct[] = JSON.parse(JSON.stringify(state.basket));
 
       if (
         newBasket[prdIdx].pieces + action.product.pieces <
@@ -68,7 +68,7 @@ export const Reducers = createReducer(
   }),
 
   on(UserActions.removeBasket, (state, action) => {
-    let newBasket: Product[] = JSON.parse(JSON.stringify(state.basket)).filter(
+    let newBasket: IProduct[] = JSON.parse(JSON.stringify(state.basket)).filter(
       (product) => product.id !== action.id
     );
 
@@ -76,5 +76,17 @@ export const Reducers = createReducer(
       ...state,
       basket: newBasket,
     };
+  }),
+  on(AdminActions.removeProductSuccess, (state, action)=>{
+    return {
+      ...state,
+      allProducts: state.allProducts.filter((product) => product.id != action.id)
+    }
+  }),
+  on(AdminActions.createProductSuccess, (state, action) => {
+return{
+  ...state,
+  allProducts: [...state.allProducts, action.product]
+}
   })
 );

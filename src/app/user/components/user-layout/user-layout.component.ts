@@ -4,7 +4,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { Product } from 'app/store/app.model';
+import { IProduct } from 'app/store/app.model';
 
 @Component({
   selector: 'app-main-layout',
@@ -29,7 +29,7 @@ export class UserLayoutComponent implements OnInit {
     this.store
       .select(UserSelector.basket)
       .subscribe(
-        (products: Product[]) => (this.amountBasket = products.length)
+        (products: IProduct[]) => (this.amountBasket = products.length)
       );
   }
 }

@@ -1,11 +1,11 @@
-import { Product } from 'app/store/app.model';
+import { IProduct } from 'app/store/app.model';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'searchProducts',
 })
 export class SearchPipe implements PipeTransform {
-  transform(products: Product[], search = ''): Product[] {
+  transform(products: IProduct[], search = ''): IProduct[] {
     if (!search.trim()) {
       return products;
     }
