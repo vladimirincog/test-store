@@ -26,7 +26,7 @@ export interface IBillboard {
 
 export interface IClient {
   firstName: string;
-  surname: string;
+  lastName: string;
   address: string;
   phone: string;
   email?: string;

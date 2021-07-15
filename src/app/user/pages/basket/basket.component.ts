@@ -1,3 +1,5 @@
+import { UserService } from 'app/user/services/user.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -13,9 +15,25 @@ import { UserActions } from 'app/store/app.actions';
 export class BasketComponent implements OnInit {
   displayedColumns: string[] = ['Product', 'Pieces', 'Price', 'Sum', 'Delete'];
   products$: Observable<IProduct[]>;
+  client: IClient = {
+    firstName: '',
+    lastName: '',
+    address: '',
+    phone: '',
+    email: '',
+  };
+  order: IOrder;
   sum: number = 0;
 
-  constructor(public store: Store) {}
+  informationForm: FormGroup = new FormGroup({
+    lastName: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+  });
+
+  constructor(public store: Store, public UserService: UserService) {}
 
   ngOnInit(): void {
     this.products$ = this.store.select(UserSelector.basket);
@@ -32,13 +50,25 @@ export class BasketComponent implements OnInit {
 
   createOrder() {
     let products: IProduct[];
-    let client: IClient;
+    this.products$.subscribe((response) => {
+      products = response;
+    });
 
-    this.products$.subscribe((response) => (products = response));
-
-    const order: IOrder = {
-      products: products,
-      client: client,
+    this.client = {
+      firstName: this.informationForm.get('firstName').value,
+      lastName: this.informationForm.get('lastName').value,
+      address: this.informationForm.get('address').value,
+      phone: this.informationForm.get('phone').value,
+      email: this.informationForm.get('email').value,
     };
+
+    this.order = {
+      products: products,
+      client: this.client,
+    };
+  }
+
+  sendOrder() {
+    this.store.dispatch(UserActions.sendOrder({ order: this.order }));
   }
 }

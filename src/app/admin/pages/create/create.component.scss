@@ -1,35 +1,23 @@
 form {
   max-width: 90%;
   margin: 3rem auto;
-}
-.full-width {
-  width: 100%;
-}
+  .card {
+    margin: 20px auto;
+    h2 {
+      text-align: center;
+    }
+    .row {
+      display: flex;
+      flex-direction: row;
+    }
 
-.shipping-card {
-  min-width: 120px;
-  margin: 20px auto;
-}
+    .col {
+      flex: 1;
+      margin-right: 20px;
 
-.mat-radio-button {
-  display: block;
-  margin: 5px 0;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-}
-
-.col {
-  flex: 1;
-  margin-right: 20px;
-}
-
-.col:last-child {
-  margin-right: 0;
-}
-
-h2 {
-  text-align: center;
+      .full-width {
+        width: 100%;
+      }
+    }
+  }
 }

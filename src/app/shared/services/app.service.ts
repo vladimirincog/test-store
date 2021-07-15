@@ -27,4 +27,6 @@ export class AppService {
   getAllProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>('http://localhost:3000/products');
   }
+
+  
 }

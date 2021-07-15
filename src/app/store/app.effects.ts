@@ -3,14 +3,16 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AppService } from 'app/shared/services/app.service';
 import { map, mergeMap } from 'rxjs/operators';
-import { AdminActions, GlobalActions, UserActions } from './app.actions';
+import { AdminActions, GlobalActions, UserActions} from './app.actions';
+import { UserService } from 'app/user/services/user.service';
 
 @Injectable()
 export class AppEffects {
   constructor(
     private actions$: Actions,
     public AppService: AppService,
-    public AdminService: AdminService
+    public AdminService: AdminService,
+    public UserService: UserService
   ) {}
 
   getCategory$ = createEffect(() => {
@@ -96,4 +98,17 @@ export class AppEffects {
       })
     );
   });
+
+  sendOrder$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.sendOrder),
+      mergeMap((response) => {
+        return this.UserService.sendOrder(response.order).pipe(
+          map((order) => {
+            return UserActions.sendOrderSuccess({order: order})
+          })
+        )
+      })
+    )
+  })
 }

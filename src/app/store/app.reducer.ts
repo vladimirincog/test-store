@@ -77,16 +77,25 @@ export const Reducers = createReducer(
       basket: newBasket,
     };
   }),
-  on(AdminActions.removeProductSuccess, (state, action)=>{
+  on(UserActions.sendOrderSuccess, (state, action) => {
     return {
       ...state,
-      allProducts: state.allProducts.filter((product) => product.id != action.id)
-    }
+      basket: new Array<IProduct>(),
+    };
+  }),
+
+  on(AdminActions.removeProductSuccess, (state, action) => {
+    return {
+      ...state,
+      allProducts: state.allProducts.filter(
+        (product) => product.id != action.id
+      ),
+    };
   }),
   on(AdminActions.createProductSuccess, (state, action) => {
-return{
-  ...state,
-  allProducts: [...state.allProducts, action.product]
-}
+    return {
+      ...state,
+      allProducts: [...state.allProducts, action.product],
+    };
   })
 );

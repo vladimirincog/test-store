@@ -10,10 +10,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatTableModule} from '@angular/material/table';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatBadgeModule } from '@angular/material/badge';
+//import { MatTabsModule } from '@angular/material/tabs';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   imports: [
@@ -32,7 +34,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatGridListModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatBadgeModule
+    MatBadgeModule,
+    //MatTabsModule,
+    MatStepperModule,
   ],
   exports: [
     MatSliderModule,
@@ -50,7 +54,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatGridListModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatBadgeModule
+    MatBadgeModule,
+    //MatTabsModule,
+    MatStepperModule,
   ],
 })
 export class MaterialModule {}

@@ -1,4 +1,4 @@
-import { ICategory, IProduct } from 'app/store/app.model';
+import { ICategory, IProduct, IOrder } from 'app/store/app.model';
 import { createAction, props} from '@ngrx/store';
 
 export namespace GlobalActions{
@@ -25,6 +25,10 @@ export namespace UserActions {
   export const addBasket = createAction('ADD_BASKET', props<{product: IProduct, maxProduct: number}>());
 
   export const removeBasket = createAction('REMOVE_BASKET', props<{id: string}>());
+
+  export const sendOrder = createAction('SEND_ORDER', props<{order: IOrder}>());
+
+  export const sendOrderSuccess = createAction('SEND_ORDER_SUCCESS', props<{order: IOrder}>());
 }
 
 export namespace AdminActions{
