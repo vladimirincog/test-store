@@ -1,9 +1,9 @@
-import { AdminService } from './../admin/services/admin.service';
+import { AdminService } from 'app/admin/services/admin.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AppService } from 'app/shared/services/app.service';
 import { map, mergeMap } from 'rxjs/operators';
-import { AdminActions, GlobalActions, UserActions} from './app.actions';
+import { AdminActions, GlobalActions, UserActions } from './app.actions';
 import { UserService } from 'app/user/services/user.service';
 
 @Injectable()
@@ -105,7 +105,46 @@ export class AppEffects {
       mergeMap((response) => {
         return this.UserService.sendOrder(response.order).pipe(
           map((order) => {
-            return UserActions.sendOrderSuccess({order: order})
+            return UserActions.sendOrderSuccess({ order: order });
+          })
+        );
+      })
+    );
+  });
+
+  getOrders$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AdminActions.getOrders),
+      mergeMap(() => {
+        return this.AdminService.getOrders().pipe(
+          map((orders) => {
+            return AdminActions.getOrdersSuccess({ orders: orders });
+          })
+        );
+      })
+    );
+  });
+
+  getOrderById$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GlobalActions.getOrderById),
+      mergeMap((response) => {
+        return this.AppService.getOrderById(response.id).pipe(
+          map((order) => {
+            return GlobalActions.getOrderByIdSuccess({ order: order });
+          })
+        );
+      })
+    );
+  });
+
+  decreaseProductPieces$ = createEffect(()=>{
+    return this.actions$.pipe(
+      ofType(GlobalActions.decreaseProductPieces),
+      mergeMap((response) => {
+        return this.AppService.decreaseProductPieces(response.product).pipe(
+          map((product) => {
+            return GlobalActions.decreaseProductPiecesSuccess({product:product});
           })
         )
       })

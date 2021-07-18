@@ -9,11 +9,19 @@ export namespace GlobalActions{
   
   export const getProductsByCategorySuccess = createAction('GET_CATEGORY_SUCCESS', props<{categoryProducts: IProduct[]}>());
 
+  export const getProductById = createAction('GET_PRODUCT_BY_ID', props<{id: string}>());
+
   export const getProductByIdSuccess = createAction('GET_PRODUCT_SUCCESS', props<{product: IProduct}>());
 
   export const getAllProductsSuccess = createAction('GET_ALL_PRODUCTS_SUCCESS', props<{products: IProduct[]}>());
 
-  export const getProductById = createAction('GET_PRODUCT_BY_ID', props<{id: string}>());
+  export const getOrderById = createAction('GET_ORDER_BY_ID', props<{id: string}>());
+
+  export const getOrderByIdSuccess = createAction('GET_ORDER_BY_ID_SUCCESS', props<{order: IOrder}>());
+
+  export const decreaseProductPieces = createAction('UPDATE_PRODUCT_PIECES', props<{product: IProduct}>());
+
+  export const decreaseProductPiecesSuccess = createAction('UPDATE_PRODUCT_PIECES_SUCCESS', props<{product: IProduct}>());
 }
 
 export namespace UserActions {
@@ -41,4 +49,8 @@ export namespace AdminActions{
   export const createProduct = createAction('CREATE_PRODUCT', props<{product: IProduct}>());
 
   export const createProductSuccess = createAction('CREATE_PRODUCT_SUCCESS', props<{product: IProduct}>());
+
+  export const getOrders = createAction('GET_ORDERS');
+
+  export const getOrdersSuccess = createAction('GET_ORDERS_SUCCESS', props<{orders: IOrder[]}>());
 }

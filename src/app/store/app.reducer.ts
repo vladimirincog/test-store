@@ -1,4 +1,4 @@
-import { IProduct, ICategory } from 'app/store/app.model';
+import { IProduct, ICategory, IOrder } from 'app/store/app.model';
 import { createReducer, on } from '@ngrx/store';
 import { AdminActions, GlobalActions, UserActions } from './app.actions';
 
@@ -8,12 +8,15 @@ export interface Store {
   allProducts?: IProduct[];
   product?: IProduct;
   basket?: IProduct[];
+  orders?: IOrder[];
+  order?: IOrder;
 }
 
 export const initialState: Store = {
   basket: new Array<IProduct>(),
   categoryProducts: new Array<IProduct>(),
   allProducts: new Array<IProduct>(),
+  orders: new Array<IOrder>(),
 };
 
 //Reducers
@@ -97,5 +100,23 @@ export const Reducers = createReducer(
       ...state,
       allProducts: [...state.allProducts, action.product],
     };
-  })
+  }),
+  on(AdminActions.getOrdersSuccess, (state, action) => {
+    return {
+      ...state,
+      orders: action.orders,
+    };
+  }),
+  on(GlobalActions.getOrderByIdSuccess, (state, action) => {
+    return {
+      ...state,
+      order: action.order,
+    };
+  }),
+  on(GlobalActions.decreaseProductPiecesSuccess, (state, action) => {
+    return {
+      ...state,
+      //order: action.order,
+    };
+  }),
 );

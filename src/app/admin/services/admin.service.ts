@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IProduct} from 'app/store/app.model';
+import { IOrder, IProduct} from 'app/store/app.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -26,6 +26,10 @@ export class AdminService {
 
   updateProduct(product: IProduct): Observable<IProduct>{
     return this.http.patch<IProduct>(`http://localhost:3000/products/${product.id}`, product);
+  }
+
+  getOrders(): Observable<IOrder[]>{
+    return this.http.get<IOrder[]>(`http://localhost:3000/orders`);
   }
 
 }

@@ -1,4 +1,4 @@
-import { UserSelector } from 'app/store/app.selectors';
+import { UserSelectors } from 'app/store/app.selectors';
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -27,7 +27,7 @@ export class UserLayoutComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.store
-      .select(UserSelector.basket)
+      .select(UserSelectors.basket)
       .subscribe(
         (products: IProduct[]) => (this.amountBasket = products.length)
       );

@@ -33,6 +33,8 @@ export interface IClient {
 }
 
 export interface IOrder {
+  id?: string;
   products: IProduct[];
   client: IClient;
+  status: "обрабатывается" | "подтвержден" | "выполнен" | 'отменен'; //"processing" | "confirmed" | "completed" | "canceled"
 }

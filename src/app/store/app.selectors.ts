@@ -20,11 +20,23 @@ export namespace GlobalSelectors {
     featureSelector,
     (state) => state.allProducts
   );
+
+  export const order = createSelector(
+    featureSelector,
+    (state) => state.order
+  );
 }
 
-export namespace UserSelector {
+export namespace UserSelectors {
   export const basket = createSelector(
     featureSelector,
     (state) => state.basket
+  );
+}
+
+export namespace AdminSelectors {
+  export const orders = createSelector(
+    featureSelector,
+    (state) => state.orders
   );
 }

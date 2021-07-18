@@ -3,11 +3,13 @@ import { EditComponent } from './pages/edit/edit.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateComponent } from './pages/create/create.component';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { OrderComponent } from './pages/order/order.component';
 
 const routes: Routes = [
   {
@@ -26,10 +28,21 @@ const routes: Routes = [
         //canActivate: [],
       },
       {
+        path: 'orders',
+        component: OrdersComponent,
+        //canActivate: [],
+      },
+      {
+        path: 'order/:id',
+        component: OrderComponent,
+        //canActivate: [],
+      },
+      {
         path: 'edit/:id',
         component: EditComponent,
         //canActivate: [],
       },
+
       { path: '', redirectTo: '/admin/login', pathMatch: 'full' },
     ],
   },
@@ -42,6 +55,8 @@ const routes: Routes = [
     DashboardComponent,
     EditComponent,
     LoginComponent,
+    OrdersComponent,
+    OrderComponent,
   ],
   imports: [ReactiveFormsModule, SharedModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
