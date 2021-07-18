@@ -13,7 +13,8 @@ import { UserActions } from 'app/store/app.actions';
   styleUrls: ['./basket.component.scss'],
 })
 export class BasketComponent implements OnInit {
-  displayedColumns: string[] = ['Product', 'Pieces', 'Price', 'Sum', 'Delete'];
+  displayedColumnsBasket: string[] = ['Product', 'Pieces', 'Price', 'Sum', 'Delete'];
+  displayedColumnsOrder: string[] = ['Product', 'Pieces', 'Price', 'Sum'];
   products$: Observable<IProduct[]>;
   client: IClient = {
     firstName: '',

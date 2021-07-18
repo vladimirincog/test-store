@@ -25,10 +25,11 @@ form {
   mat-form-field{
     min-width: 100%;
   }
+
 }
 
 .footer {
-  max-width: 70%;
+  min-width: 70%;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -36,9 +37,4 @@ form {
 
 h2{
   text-align: center;
-}
-
-.order{
-  width: 70%;
-  margin: auto;
 }

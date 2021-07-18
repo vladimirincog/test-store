@@ -2,7 +2,7 @@
 
   <mat-stepper [linear]="true" #stepper>
     <mat-step>
-      <ng-template matStepLabel>Товары</ng-template>
+      <ng-template matStepLabel>Шаг 1</ng-template>
       <table mat-table [dataSource]="products$ | async" class="mat-elevation-z8" [fixedLayout]='true'>
 
         <ng-container matColumnDef="Product">
@@ -32,8 +32,8 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsBasket"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsBasket;"></tr>
       </table>
       <div class='footer'>
         <h2>Итог: {{sum | currency}}</h2>
@@ -43,7 +43,7 @@
 
     <mat-step [stepControl]="informationForm">
       <form [formGroup]="informationForm">
-        <ng-template matStepLabel>Контактная информация</ng-template>
+        <ng-template matStepLabel>Шаг 2</ng-template>
         <div class="row">
           <div class="col">
             <mat-form-field>
@@ -87,24 +87,46 @@
       </div>
     </mat-step>
 
-    <mat-step label="Подтвердить заказ">
+    <mat-step>
+      <ng-template matStepLabel>Шаг 3</ng-template>
       <div>
-        <h2>Информация о заказе</h2>
-        <div class="order">
-          <div class="row" *ngFor="let product of products$ | async">
-            <div class="col">
-              - {{product.name}}
-            </div>
-          </div>
 
-          <p>Получатель: {{client.firstName + ' ' + client.lastName }}</p>
-          <p>Адрес: {{client.address}}</p>
-          <p>Телефон: {{client.phone}}</p>
-          <p>Email: {{client.email}}</p>
 
+        <table mat-table [dataSource]="products$ | async" class="mat-elevation-z8" [fixedLayout]='true'>
+
+          <ng-container matColumnDef="Product">
+            <th mat-header-cell *matHeaderCellDef> Название </th>
+            <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Pieces">
+            <th mat-header-cell *matHeaderCellDef class='small'> Кол-во </th>
+            <td mat-cell *matCellDef="let product" class='small'> {{product.pieces}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef> Цена </th>
+            <td mat-cell *matCellDef="let product"> {{product.price | currency}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Sum">
+            <th mat-header-cell *matHeaderCellDef class='small'> Сумма </th>
+            <td mat-cell *matCellDef="let product" class='small'> {{+product.pieces*+product.price | currency}} </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsOrder"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsOrder;"></tr>
+        </table>
+        <div class="footer">
+          <p>Получатель: {{client.firstName + ' ' + client.lastName }}
+          Адрес: {{client.address}}
+         Телефон: {{client.phone}}
+          Email: {{client.email}}</p>
           <h3> К оплате: {{sum |currency}} </h3>
-
         </div>
+        
+
       </div>
       <div>
         <div class="footer">
