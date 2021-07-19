@@ -125,4 +125,16 @@ export const Reducers = createReducer(
       //order: action.order,
     };
   }),
+  on(GlobalActions.increaseProductPiecesSuccess, (state, action) => {
+    return {
+      ...state,
+      //order: action.order,
+    };
+  }),
+  on(AdminActions.removeOrderSuccess, (state, action) => {
+    return {
+      ...state,
+      orders: state.orders.filter((order) => order.id != action.id),
+    };
+  })
 );

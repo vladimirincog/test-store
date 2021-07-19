@@ -19,9 +19,13 @@ export namespace GlobalActions{
 
   export const getOrderByIdSuccess = createAction('GET_ORDER_BY_ID_SUCCESS', props<{order: IOrder}>());
 
-  export const decreaseProductPieces = createAction('UPDATE_PRODUCT_PIECES', props<{product: IProduct}>());
+  export const decreaseProductPieces = createAction('DECREASE_PRODUCT_PIECES', props<{product: IProduct}>());
 
-  export const decreaseProductPiecesSuccess = createAction('UPDATE_PRODUCT_PIECES_SUCCESS', props<{product: IProduct}>());
+  export const decreaseProductPiecesSuccess = createAction('DECREASE_PRODUCT_PIECES_SUCCESS', props<{product: IProduct}>());
+
+  export const increaseProductPieces = createAction('INCREASE_PRODUCT_PIECES', props<{product: IProduct}>());
+
+  export const increaseProductPiecesSuccess = createAction('INCREASE_PRODUCT_PIECES_SUCCESS', props<{product: IProduct}>());
 }
 
 export namespace UserActions {
@@ -57,4 +61,8 @@ export namespace AdminActions{
   export const updateOrderStatus = createAction('UPDATE_ORDER_STATUS', props<{id:string, status: 'обрабатывается' | 'подтвержден' | 'выполнен' | 'отменен' }>());
 
   export const updateOrderStatusSuccess = createAction('UPDATE_ORDER_STATUS_SUCCESS', props<{order:IOrder}>());
+  
+  export const removeOrder = createAction('REMOVE_ORDER', props<{id: string}>());
+
+  export const removeOrderSuccess = createAction('REMOVE_ORDER_SUCCESS', props<{id: string}>());
 }

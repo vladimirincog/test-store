@@ -152,9 +152,9 @@ export class AppEffects {
     )
   })
 
-  /*increaseProductPieces$ = createEffect(()=>{
+  increaseProductPieces$ = createEffect(()=>{
     return this.actions$.pipe(
-      ofType(GlobalActions.decreaseProductPieces),
+      ofType(GlobalActions.increaseProductPieces),
       mergeMap((response) => {
         return this.AppService.increaseProductPieces(response.product).pipe(
           map((product) => {
@@ -163,7 +163,7 @@ export class AppEffects {
         )
       })
     )
-  })*/
+  })
 
   updateOrderStatus$ = createEffect(()=>{
     return this.actions$.pipe(
@@ -177,4 +177,17 @@ export class AppEffects {
       })
     )
   })
+
+  removeOrder$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AdminActions.removeOrder),
+      mergeMap((response) => {
+        return this.AdminService.removeOrderById(response.id).pipe(
+          map((id:string) => {
+            return AdminActions.removeOrderSuccess({ id: id });
+          })
+        );
+      })
+    );
+  });
 }

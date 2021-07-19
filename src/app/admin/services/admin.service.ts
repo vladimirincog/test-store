@@ -43,4 +43,14 @@ export class AdminService {
       status: status,
     });
   }
+
+  removeOrderById(id: string): Observable<string> {
+    return this.http
+      .delete<string>(`http://localhost:3000/orders/${id}`)
+      .pipe(
+        map((data) => {
+          return id;
+        })
+      );
+  }
 }

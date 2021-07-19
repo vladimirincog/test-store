@@ -46,4 +46,18 @@ export class AppService {
       })
     );
   }
+
+  increaseProductPieces(product: IProduct): Observable<IProduct> {
+    return this.getProductById(product.id).pipe(
+      mergeMap((oldProduct: IProduct) => {
+        return this.http.put<IProduct>(
+          `http://localhost:3000/products/${product.id}`,
+          {
+            ...product,
+            pieces: (+oldProduct.pieces + +product.pieces).toString(),
+          }
+        );
+      })
+    );
+  }
 }

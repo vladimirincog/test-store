@@ -30,8 +30,6 @@ export class DashboardComponent implements OnInit {
     this.products$ = this.store.select(GlobalSelectors.allProducts);
   }
 
-  editProduct(id: string) {}
-
   removeProduct(id: string): void {
     this.store.dispatch(AdminActions.removeProduct({ id: id }));
   }
