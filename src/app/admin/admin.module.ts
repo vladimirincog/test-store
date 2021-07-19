@@ -4,12 +4,15 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateComponent } from './pages/create/create.component';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { ProductsComponent } from './pages/order/components/products/products.component';
+import { ClientComponent } from './pages/order/components/client/client.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { OrderComponent } from './pages/order/order.component';
+
 
 const routes: Routes = [
   {
@@ -57,6 +60,8 @@ const routes: Routes = [
     LoginComponent,
     OrdersComponent,
     OrderComponent,
+    ProductsComponent,
+    ClientComponent,
   ],
   imports: [ReactiveFormsModule, SharedModule, RouterModule.forChild(routes)],
   exports: [RouterModule],

@@ -1,0 +1,19 @@
+<div class="container" *ngIf="(order$ | async) !== undefined; else loading">
+    <h1>Заказ № {{(order$ | async).id}}</h1>
+
+    <mat-form-field>
+        <mat-label>Статус</mat-label>
+        <mat-select [value]="(order$ | async).status" (selectionChange)="updateStatus($event.value)">
+            <mat-option *ngFor="let status of orderService.statuses" [value]="status">
+                {{status | titlecase}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <order-products [products]="(order$ | async).products"></order-products>
+
+    <order-client [client]="(order$ | async).client"></order-client>
+</div>
+
+<ng-template #loading>
+    <mat-spinner></mat-spinner>
+</ng-template>

@@ -107,6 +107,12 @@ export const Reducers = createReducer(
       orders: action.orders,
     };
   }),
+  on(AdminActions.updateOrderStatusSuccess, (state, action) => {
+    return {
+      ...state,
+      order: action.order,
+    };
+  }),
   on(GlobalActions.getOrderByIdSuccess, (state, action) => {
     return {
       ...state,

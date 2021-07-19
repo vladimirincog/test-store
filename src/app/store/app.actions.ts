@@ -53,4 +53,8 @@ export namespace AdminActions{
   export const getOrders = createAction('GET_ORDERS');
 
   export const getOrdersSuccess = createAction('GET_ORDERS_SUCCESS', props<{orders: IOrder[]}>());
+
+  export const updateOrderStatus = createAction('UPDATE_ORDER_STATUS', props<{id:string, status: 'обрабатывается' | 'подтвержден' | 'выполнен' | 'отменен' }>());
+
+  export const updateOrderStatusSuccess = createAction('UPDATE_ORDER_STATUS_SUCCESS', props<{order:IOrder}>());
 }

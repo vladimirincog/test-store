@@ -1,7 +1,9 @@
-import { AppService } from 'app/shared/services/app.service';
+import { AdminService } from 'app/admin/services/admin.service';
+import { OrderService } from './services/order-service';
+import { BreakpointService } from './../../../shared/services/breakpoint.service';
 import { Observable } from 'rxjs';
 import { GlobalSelectors } from 'app/store/app.selectors';
-import { GlobalActions } from 'app/store/app.actions';
+import { AdminActions, GlobalActions } from 'app/store/app.actions';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -15,13 +17,30 @@ import { IOrder } from 'app/store/app.model';
 export class OrderComponent implements OnInit {
   orderId: string;
   order$: Observable<IOrder>;
-  constructor(public route: ActivatedRoute, public store: Store) {}
+  value;
+
+  constructor(
+    public route: ActivatedRoute,
+    public store: Store,
+    public breakpoint: BreakpointService,
+    public orderService: OrderService,
+    public adminService: AdminService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.orderId = params.id;
     });
     this.store.dispatch(GlobalActions.getOrderById({ id: this.orderId }));
+    this.order$ = this.store.select(GlobalSelectors.order);
+  }
+
+  updateStatus(
+    value: 'обрабатывается' | 'подтвержден' | 'выполнен' | 'отменен'
+  ): void {
+    this.store.dispatch(
+      AdminActions.updateOrderStatus({ id: this.orderId, status: value })
+    );
     this.order$ = this.store.select(GlobalSelectors.order);
   }
 }
