@@ -12,7 +12,7 @@ import { IOrder } from 'app/store/app.model';
 })
 export class OrdersComponent implements OnInit {
   displayedColumnsOrder: string[] = ['ID', 'Client', 'Status', 'Details' , 'Delete'];
-  searchStr: String = '';
+  searchStr: string = '';
   orders$: Observable<IOrder[]>;
   constructor(public store: Store) {}
 

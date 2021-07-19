@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { OrderComponent } from './pages/order/order.component';
+import { SearchOrdersPipe } from './pipes/search-order.pipe';
 
 
 const routes: Routes = [
@@ -62,6 +63,7 @@ const routes: Routes = [
     OrderComponent,
     ProductsComponent,
     ClientComponent,
+    SearchOrdersPipe
   ],
   imports: [ReactiveFormsModule, SharedModule, RouterModule.forChild(routes)],
   exports: [RouterModule],

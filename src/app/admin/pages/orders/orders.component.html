@@ -1,11 +1,11 @@
 <div class="search-container">
     <mat-form-field appearance="fill">
-        <input matInput placeholder="Введите id заказа (поиск пока что не работает)" [(ngModel)]="searchStr">
+        <input matInput placeholder="Введите id заказа" [(ngModel)]="searchStr">
     </mat-form-field>
 </div>
 
 <div class="container" *ngIf="(orders$ | async) !== undefined; else loading">
-    <table mat-table [dataSource]="orders$ | async " class="mat-elevation-z8" [fixedLayout]='true'>
+    <table mat-table [dataSource]="orders$ | async | searchOrders : searchStr" class="mat-elevation-z8" [fixedLayout]='true'>
 
         <ng-container matColumnDef="ID">
             <th mat-header-cell *matHeaderCellDef> ID </th>
