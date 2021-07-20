@@ -2,10 +2,11 @@ import { AdminService } from 'app/admin/services/admin.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AppService } from 'app/shared/services/app.service';
-import { map, mergeMap } from 'rxjs/operators';
-import { AdminActions, GlobalActions, UserActions} from './app.actions';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { AdminActions, GlobalActions, UserActions } from './app.actions';
 import { UserService } from 'app/user/services/user.service';
 import { ICategory, IOrder, IProduct } from './app.model';
+import { EMPTY, of } from 'rxjs';
 
 @Injectable()
 export class AppEffects {
@@ -79,7 +80,7 @@ export class AppEffects {
       ofType(AdminActions.removeProduct),
       mergeMap((response) => {
         return this.AdminService.removeProductById(response.id).pipe(
-          map((id:string) => {
+          map((id: string) => {
             return AdminActions.removeProductSuccess({ id: id });
           })
         );
@@ -133,57 +134,65 @@ export class AppEffects {
         return this.AppService.getOrderById(response.id).pipe(
           map((order: IOrder) => {
             return GlobalActions.getOrderByIdSuccess({ order: order });
+          }),
+          catchError((err) => of({ type: 'GET_ORDER_BY_ID_FAILURE', payload: {error: err}}))
+        );
+      })
+    );
+  });
+
+  decreaseProductPieces$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GlobalActions.decreaseProductPieces),
+      mergeMap((response) => {
+        return this.AppService.decreaseProductPieces(response.product).pipe(
+          map((product: IProduct) => {
+            return GlobalActions.decreaseProductPiecesSuccess({
+              product: product,
+            });
           })
         );
       })
     );
   });
 
-  decreaseProductPieces$ = createEffect(()=>{
-    return this.actions$.pipe(
-      ofType(GlobalActions.decreaseProductPieces),
-      mergeMap((response) => {
-        return this.AppService.decreaseProductPieces(response.product).pipe(
-          map((product: IProduct) => {
-            return GlobalActions.decreaseProductPiecesSuccess({product:product});
-          })
-        )
-      })
-    )
-  })
-
-  increaseProductPieces$ = createEffect(()=>{
+  increaseProductPieces$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(GlobalActions.increaseProductPieces),
       mergeMap((response) => {
         return this.AppService.increaseProductPieces(response.product).pipe(
           map((product) => {
-            return GlobalActions.increaseProductPiecesSuccess({product:product});
+            return GlobalActions.increaseProductPiecesSuccess({
+              product: product,
+            });
           })
-        )
+        );
       })
-    )
-  })
+    );
+  });
 
-  updateOrderStatus$ = createEffect(()=>{
+  updateOrderStatus$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AdminActions.updateOrderStatus),
       mergeMap((response) => {
-        return this.AdminService.updateOrderStatus(response.id, response.status).pipe(
-          map((order:IOrder) => {
-            return AdminActions.updateOrderStatusSuccess({order: order});
+        return this.AdminService.updateOrderStatus(
+          response.id,
+          response.status
+        ).pipe(
+          map((order: IOrder) => {
+            return AdminActions.updateOrderStatusSuccess({ order: order });
           })
-        )
+        );
       })
-    )
-  })
+    );
+  });
 
   removeOrder$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AdminActions.removeOrder),
       mergeMap((response) => {
         return this.AdminService.removeOrderById(response.id).pipe(
-          map((id:string) => {
+          map((id: string) => {
             return AdminActions.removeOrderSuccess({ id: id });
           })
         );

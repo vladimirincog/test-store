@@ -1,8 +1,8 @@
-import { mergeMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { ICategory, IOrder, IProduct } from 'app/store/app.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,12 @@ export class AppService {
   }
 
   getOrderById(id: string): Observable<IOrder> {
-    return this.http.get<IOrder>(`http://localhost:3000/orders/${id}`);
+    return this.http.get<IOrder>(`http://localhost:3000/orders/${id}`).pipe(
+      catchError((error) => {
+        console.log('Error', error.message);
+        return throwError(error);
+      })
+    );
   }
 
   decreaseProductPieces(product: IProduct): Observable<IProduct> {

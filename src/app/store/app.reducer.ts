@@ -10,6 +10,7 @@ export interface Store {
   basket?: IProduct[];
   orders?: IOrder[];
   order?: IOrder;
+  err?: any;
 }
 
 export const initialState: Store = {
@@ -19,7 +20,6 @@ export const initialState: Store = {
   orders: new Array<IOrder>(),
 };
 
-//Reducers
 export const Reducers = createReducer(
   initialState,
 
@@ -134,7 +134,14 @@ export const Reducers = createReducer(
   on(AdminActions.removeOrderSuccess, (state, action) => {
     return {
       ...state,
-      orders: state.orders.filter((order) => order.id != action.id),
+      orders: state.orders.filter((order) => order.id !== action.id),
+    };
+  }),
+  on(GlobalActions.getOrderByIdFailure, (state, action) => {
+    return {
+      ...state,
+      err: action.error,
     };
   })
+
 );

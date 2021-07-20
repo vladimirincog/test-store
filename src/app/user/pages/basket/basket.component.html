@@ -60,7 +60,9 @@
         <div class="row">
           <div class="col">
             <mat-form-field>
-              <input matInput placeholder="Телефон" formControlName="phone" required>
+              <mat-label>Телефон</mat-label>
+              <span matPrefix>+7 &nbsp;</span>
+              <input type="tel" matInput placeholder="9005558866" formControlName="phone" required>
             </mat-form-field>
           </div>
 

@@ -5,6 +5,7 @@
 </div>
 
 <div class="container" *ngIf="(orders$ | async) !== undefined; else loading">
+    <p>*Только из отмененного заказа можно вернуть товары на склад</p>
     <table mat-table [dataSource]="orders$ | async | searchOrders : searchStr" class="mat-elevation-z8"
         [fixedLayout]='true'>
 

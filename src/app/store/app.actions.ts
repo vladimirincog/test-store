@@ -19,6 +19,8 @@ export namespace GlobalActions{
 
   export const getOrderByIdSuccess = createAction('GET_ORDER_BY_ID_SUCCESS', props<{order: IOrder}>());
 
+  export const getOrderByIdFailure = createAction('GET_ORDER_BY_ID_FAILURE', props<{error: any}>()); //ANY
+
   export const decreaseProductPieces = createAction('DECREASE_PRODUCT_PIECES', props<{product: IProduct}>());
 
   export const decreaseProductPiecesSuccess = createAction('DECREASE_PRODUCT_PIECES_SUCCESS', props<{product: IProduct}>());
@@ -44,6 +46,7 @@ export namespace UserActions {
 }
 
 export namespace AdminActions{
+  
   export const initDashboard = createAction('INIT_DASHBOARD');
 
   export const removeProduct = createAction('REMOVE_PRODUCT', props<{id: string}>());

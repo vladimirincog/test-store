@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AdminActions, GlobalActions } from 'app/store/app.actions';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AdminSelectors, GlobalSelectors } from 'app/store/app.selectors';
+import { AdminSelectors } from 'app/store/app.selectors';
 import { IOrder, IProduct } from 'app/store/app.model';
 
 @Component({
@@ -30,21 +30,22 @@ export class OrdersComponent implements OnInit {
   }
 
   returnProducts(id: string) {
-
+    let products: IProduct[] = new Array<IProduct>();
+    let subOrders: Subscription;
     
-    let products: IProduct[];
-
-    this.orders$.subscribe(
+    subOrders = this.orders$.subscribe(
       (orders: IOrder[]) =>
         (products = orders.find((order) => order.id === id).products)
     );
 
-    //добавить проверку естьли продукт в БД
+    //добавить проверку есть ли продукт в БД
     products.forEach((product: IProduct) =>
       this.store.dispatch(
         GlobalActions.increaseProductPieces({ product: product })
       )
     );
+
+    subOrders.unsubscribe();
   }
 
   removeOrder(id: string) {
