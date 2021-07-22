@@ -2,7 +2,7 @@ import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { ICategory, IOrder, IProduct } from 'app/store/app.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, throwError } from 'rxjs';
+import { EMPTY, Observable, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -30,12 +30,9 @@ export class AppService {
   }
 
   getOrderById(id: string): Observable<IOrder> {
-    return this.http.get<IOrder>(`http://localhost:3000/orders/${id}`).pipe(
-      catchError((error) => {
-        console.log('Error', error.message);
-        return throwError(error);
-      })
-    );
+    return this.http
+      .get<IOrder>(`http://localhost:3000/orders/${id}`)
+      .pipe(catchError(this.errorStatus));
   }
 
   decreaseProductPieces(product: IProduct): Observable<IProduct> {
@@ -65,4 +62,19 @@ export class AppService {
       })
     );
   }
+
+  private errorStatus(err: any) {
+    return throwError(err.status);
+  }
+
+  /*private handleError(err: any) {
+    let errorMessage: string;
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
+    }
+    console.error(err);
+    return throwError(errorMessage);
+  }*/
 }

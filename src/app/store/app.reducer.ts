@@ -10,7 +10,7 @@ export interface Store {
   basket?: IProduct[];
   orders?: IOrder[];
   order?: IOrder;
-  err?: any;
+  errorStatus: string;
 }
 
 export const initialState: Store = {
@@ -18,6 +18,7 @@ export const initialState: Store = {
   categoryProducts: new Array<IProduct>(),
   allProducts: new Array<IProduct>(),
   orders: new Array<IOrder>(),
+  errorStatus: '',
 };
 
 export const Reducers = createReducer(
@@ -140,7 +141,7 @@ export const Reducers = createReducer(
   on(GlobalActions.getOrderByIdFailure, (state, action) => {
     return {
       ...state,
-      err: action.error,
+      errorStatus: action.errorStatus,
     };
   })
 

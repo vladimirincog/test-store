@@ -4,8 +4,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { CommonModule } from '@angular/common';
-import { CardProductComponent } from './components/product/card-product.component';
 import { RouterModule } from '@angular/router';
+
+import { CardProductComponent } from './components/product/card-product.component';
 
 @NgModule({
   declarations: [CardProductComponent, SearchPipe],
@@ -15,7 +16,7 @@ import { RouterModule } from '@angular/router';
     MaterialModule,
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [
     HttpClientModule,
@@ -24,7 +25,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     CardProductComponent,
     SearchPipe,
-    FormsModule
+    FormsModule,
   ],
 })
 export class SharedModule {}

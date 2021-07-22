@@ -12,9 +12,11 @@ import { GlobalActions } from 'app/store/app.actions';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  order$: Observable<IOrder>;
+  categories$: Observable<ICategory[]>;
+  errorStatus$: Observable<string>;
   searchStr: string = '';
-  order: IOrder;
-  categories: ICategory[];
+  category: ICategory;
 
   constructor(public breakpoint: BreakpointService, public store: Store) {}
 
@@ -22,18 +24,30 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(GlobalActions.getCategories());
-    this.store
-      .select(GlobalSelectors.categories)
-      .subscribe((categories: ICategory[]) => (this.categories = categories));
+
+    this.categories$ = this.store.select(GlobalSelectors.categories);
+
+    this.order$ = this.store.select(GlobalSelectors.order);
+
+    this.errorStatus$ = this.store.select(GlobalSelectors.errorStatus);
+
+    this.randomCategory();
   }
 
   findOrder() {
+    //номер заказа может состоять только из цифр
     if (+this.searchStr !== NaN) {
       this.store.dispatch(GlobalActions.getOrderById({ id: this.searchStr }));
-      this.store.select(GlobalSelectors.order).subscribe((order: IOrder) => this.order = order, (error) => console.log('Привет ', error))
     } else {
       this.searchStr = '';
     }
   }
 
+  randomCategory() {
+    this.categories$.subscribe((categories: ICategory[]) => {
+      if (categories != undefined) {
+        this.category = categories[Math.floor(Math.random() * categories.length)];
+      }
+    });
+  }
 }

@@ -10,15 +10,16 @@
         <button mat-button color="primary" [disabled]="!searchStr" (click)="findOrder()">Найти</button>
     </mat-grid-tile>
 
-    <mat-grid-tile [colspan]="4" [rowspan]="6 + order.products.length" *ngIf="order != undefined">
+    <mat-grid-tile [colspan]="4" [rowspan]="6 + (order$ | async).products.length"
+        *ngIf="(order$ | async) != undefined && (errorStatus$ | async) == ''">
         <mat-card class="order">
             <mat-card-content>
-                <h2>Заказ № {{order.id}}</h2>
-                <p>Статус заказа: {{order.status}}</p>
-                <p>Получатель: {{order.client.firstName + ' ' + order.client.lastName}}</p>
-                <p>Контакты: Тел.: {{order.client.phone}}, Email: {{order.client.email}}</p>
-                <p>Адрес: {{order.client.address}}</p>
-                <table mat-table [dataSource]="order.products" [fixedLayout]='true'>
+                <h2>Заказ № {{(order$ | async).id}}</h2>
+                <p>Статус заказа: {{(order$ | async).status}}</p>
+                <p>Получатель: {{(order$ | async).client.firstName + ' ' + (order$ | async).client.lastName}}</p>
+                <p>Контакты: Тел.: {{(order$ | async).client.phone}}, Email: {{(order$ | async).client.email}}</p>
+                <p>Адрес: {{(order$ | async).client.address}}</p>
+                <table mat-table [dataSource]="(order$ | async).products" [fixedLayout]='true'>
 
                     <ng-container matColumnDef="Name">
                         <th mat-header-cell *matHeaderCellDef> Наименование </th>
@@ -49,9 +50,17 @@
         </mat-card>
     </mat-grid-tile>
 
+    <mat-grid-tile [colspan]="4" [rowspan]="breakpoint.isMobile() ? 2 : 1" *ngIf="(errorStatus$ | async) != ''">
+        <mat-card>
+            <p class="danger">Товар не найден, попробуйте снова или свяжитесь с тест-менеджером</p>
+        </mat-card>
+    </mat-grid-tile>
 
     <mat-grid-tile [colspan]="breakpoint.isMobile() ? 4 : 2" [rowspan]="4">
-        <mat-card>Карусель с реклама категорий</mat-card>
+        <mat-card *ngIf="category !== undefined" [routerLink]="['/', 'category', category.id]">
+            <button mat-button color="primary" class="long" [routerLink]="'catalog'">Лучшие {{ category.name |
+                lowercase}}</button>
+        </mat-card>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="breakpoint.isMobile() ? 4 : 2" [rowspan]="4">

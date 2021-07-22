@@ -1,3 +1,4 @@
+import { Store } from '@ngrx/store';
 import { AdminService } from 'app/admin/services/admin.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -6,7 +7,7 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { AdminActions, GlobalActions, UserActions } from './app.actions';
 import { UserService } from 'app/user/services/user.service';
 import { ICategory, IOrder, IProduct } from './app.model';
-import { EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 
 @Injectable()
 export class AppEffects {
@@ -14,7 +15,8 @@ export class AppEffects {
     private actions$: Actions,
     public AppService: AppService,
     public AdminService: AdminService,
-    public UserService: UserService
+    public UserService: UserService,
+    public store: Store
   ) {}
 
   getCategory$ = createEffect(() => {
@@ -133,9 +135,12 @@ export class AppEffects {
       mergeMap((response) => {
         return this.AppService.getOrderById(response.id).pipe(
           map((order: IOrder) => {
+            this.store.dispatch(GlobalActions.getOrderByIdFailure({errorStatus : ""}))
             return GlobalActions.getOrderByIdSuccess({ order: order });
           }),
-          catchError((err) => of({ type: 'GET_ORDER_BY_ID_FAILURE', payload: {error: err}}))
+          catchError((errorStatus) =>
+            of(GlobalActions.getOrderByIdFailure({ errorStatus }))
+          )
         );
       })
     );

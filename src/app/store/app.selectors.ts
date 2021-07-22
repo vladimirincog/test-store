@@ -26,9 +26,9 @@ export namespace GlobalSelectors {
     (state) => state.order
   );
 
-  export const error = createSelector(
+  export const errorStatus = createSelector(
     featureSelector,
-    (state) => state.err
+    (state) => state.errorStatus
   );
 }
 
