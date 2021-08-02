@@ -21,10 +21,7 @@ export namespace GlobalSelectors {
     (state) => state.allProducts
   );
 
-  export const order = createSelector(
-    featureSelector,
-    (state) => state.order
-  );
+  export const order = createSelector(featureSelector, (state) => state.order);
 
   export const errorStatus = createSelector(
     featureSelector,
@@ -44,4 +41,6 @@ export namespace AdminSelectors {
     featureSelector,
     (state) => state.orders
   );
+
+  export const token = createSelector(featureSelector, (state) => state.token);
 }

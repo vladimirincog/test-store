@@ -1,4 +1,4 @@
-import { IProduct, ICategory, IOrder } from 'app/store/app.model';
+import { IProduct, ICategory, IOrder, IToken } from 'app/store/app.model';
 import { createReducer, on } from '@ngrx/store';
 import { AdminActions, GlobalActions, UserActions } from './app.actions';
 
@@ -10,6 +10,7 @@ export interface Store {
   basket?: IProduct[];
   orders?: IOrder[];
   order?: IOrder;
+  token?: IToken | null;
   errorStatus: string;
 }
 
@@ -19,29 +20,13 @@ export const initialState: Store = {
   allProducts: new Array<IProduct>(),
   orders: new Array<IOrder>(),
   errorStatus: '',
+  token: JSON.parse(JSON.stringify(localStorage.getItem('token-exp'))) ,
 };
 
 export const Reducers = createReducer(
   initialState,
 
-  on(GlobalActions.getCategoriesSuccess, (state, action) => ({
-    ...state,
-    categories: action.categories,
-  })),
-  on(GlobalActions.getProductsByCategorySuccess, (state, action) => ({
-    ...state,
-    categoryProducts: action.categoryProducts,
-  })),
-  on(GlobalActions.getProductByIdSuccess, (state, action) => ({
-    ...state,
-    product: action.product,
-  })),
-
-  on(GlobalActions.getAllProductsSuccess, (state, action) => ({
-    ...state,
-    allProducts: action.products,
-  })),
-
+  //==========================USER=================================//
   on(UserActions.addBasket, (state, action) => {
     let prdIdx: number = state.basket.findIndex(
       (product) => product.id === action.product.id
@@ -88,6 +73,7 @@ export const Reducers = createReducer(
     };
   }),
 
+  //==========================ADMIN=================================//
   on(AdminActions.removeProductSuccess, (state, action) => {
     return {
       ...state,
@@ -114,6 +100,21 @@ export const Reducers = createReducer(
       order: action.order,
     };
   }),
+  on(AdminActions.loginSuccess, (state, action) => {
+    return {
+      ...state,
+      token: { accessToken: action.token.accessToken, expires: action.token.expires },
+    };
+  }),
+
+  on(AdminActions.logout, (state) => {
+    return {
+      ...state,
+      token: null,
+    };
+  }),
+
+  //==========================GLOBAL=================================//
   on(GlobalActions.getOrderByIdSuccess, (state, action) => {
     return {
       ...state,
@@ -143,6 +144,22 @@ export const Reducers = createReducer(
       ...state,
       errorStatus: action.errorStatus,
     };
-  })
+  }),
+  on(GlobalActions.getCategoriesSuccess, (state, action) => ({
+    ...state,
+    categories: action.categories,
+  })),
+  on(GlobalActions.getProductsByCategorySuccess, (state, action) => ({
+    ...state,
+    categoryProducts: action.categoryProducts,
+  })),
+  on(GlobalActions.getProductByIdSuccess, (state, action) => ({
+    ...state,
+    product: action.product,
+  })),
 
+  on(GlobalActions.getAllProductsSuccess, (state, action) => ({
+    ...state,
+    allProducts: action.products,
+  }))
 );

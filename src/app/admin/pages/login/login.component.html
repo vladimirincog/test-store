@@ -5,8 +5,8 @@
 
             <div class="row">
                 <mat-form-field class="full-width">
-                    <input matInput placeholder="Логин" formControlName="login">
-                    <mat-error *ngIf="form.controls['login'].hasError('required')">
+                    <input matInput placeholder="Логин" formControlName="email">
+                    <mat-error *ngIf="form.controls['email'].hasError('required')">
                         <strong>Поле логин не может быть пустым</strong>
                     </mat-error>
                 </mat-form-field>
@@ -24,6 +24,6 @@
                 </mat-form-field>
             </div>
         </mat-card-content>
-        <button mat-raised-button color="primary" type="submit">Войти</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="submitted">Войти</button>
     </mat-card>
 </form>

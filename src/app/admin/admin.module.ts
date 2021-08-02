@@ -13,7 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { OrderComponent } from './pages/order/order.component';
 import { SearchOrdersPipe } from './pipes/search-order.pipe';
-
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -24,27 +24,27 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        //canActivate: [],
+        canActivate: [AuthGuard],
       },
       {
         path: 'create',
         component: CreateComponent,
-        //canActivate: [],
+        canActivate: [AuthGuard],
       },
       {
         path: 'orders',
         component: OrdersComponent,
-        //canActivate: [],
+        canActivate: [AuthGuard],
       },
       {
         path: 'order/:id',
         component: OrderComponent,
-        //canActivate: [],
+        canActivate: [AuthGuard],
       },
       {
         path: 'edit/:id',
         component: EditComponent,
-        //canActivate: [],
+        canActivate: [AuthGuard],
       },
 
       { path: '', redirectTo: '/admin/login', pathMatch: 'full' },
@@ -63,7 +63,7 @@ const routes: Routes = [
     OrderComponent,
     ProductsComponent,
     ClientComponent,
-    SearchOrdersPipe
+    SearchOrdersPipe,
   ],
   imports: [ReactiveFormsModule, SharedModule, RouterModule.forChild(routes)],
   exports: [RouterModule],

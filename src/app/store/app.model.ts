@@ -1,4 +1,4 @@
-export interface IAdministrator {
+export interface IUser {
   email: string;
   password: string;
 }
@@ -37,4 +37,17 @@ export interface IOrder {
   products: IProduct[];
   client: IClient;
   status: 'обрабатывается' | 'подтвержден' | 'выполнен' | 'отменен'; //"processing" | "confirmed" | "completed" | "canceled"
+}
+
+export interface IAuthResponse {
+  accessToken: string;
+  user: {
+    email: string;
+    id: number;
+  }
+}
+
+export interface IToken{
+  accessToken: string;
+  expires: string;
 }

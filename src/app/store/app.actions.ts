@@ -1,4 +1,4 @@
-import { ICategory, IProduct, IOrder } from 'app/store/app.model';
+import { ICategory, IProduct, IOrder, IUser, IAuthResponse, IToken } from 'app/store/app.model';
 import { createAction, props} from '@ngrx/store';
 
 export namespace GlobalActions{
@@ -46,6 +46,12 @@ export namespace UserActions {
 }
 
 export namespace AdminActions{
+  
+  export const login = createAction('LOGIN', props<{user: IUser}>());
+
+  export const loginSuccess = createAction('LOGIN_SUCCESS', props<{token: IToken}>());
+
+  export const logout = createAction('LOGOUT');
   
   export const initDashboard = createAction('INIT_DASHBOARD');
 

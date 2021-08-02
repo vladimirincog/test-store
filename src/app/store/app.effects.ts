@@ -1,3 +1,4 @@
+import { AuthService } from 'app/admin/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AdminService } from 'app/admin/services/admin.service';
 import { Injectable } from '@angular/core';
@@ -6,7 +7,7 @@ import { AppService } from 'app/shared/services/app.service';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { AdminActions, GlobalActions, UserActions } from './app.actions';
 import { UserService } from 'app/user/services/user.service';
-import { ICategory, IOrder, IProduct } from './app.model';
+import { IAuthResponse, ICategory, IOrder, IProduct } from './app.model';
 import { of } from 'rxjs';
 
 @Injectable()
@@ -16,6 +17,7 @@ export class AppEffects {
     public AppService: AppService,
     public AdminService: AdminService,
     public UserService: UserService,
+    public AuthService: AuthService,
     public store: Store
   ) {}
 
@@ -135,7 +137,9 @@ export class AppEffects {
       mergeMap((response) => {
         return this.AppService.getOrderById(response.id).pipe(
           map((order: IOrder) => {
-            this.store.dispatch(GlobalActions.getOrderByIdFailure({errorStatus : ""}))
+            this.store.dispatch(
+              GlobalActions.getOrderByIdFailure({ errorStatus: '' })
+            );
             return GlobalActions.getOrderByIdSuccess({ order: order });
           }),
           catchError((errorStatus) =>
@@ -199,6 +203,26 @@ export class AppEffects {
         return this.AdminService.removeOrderById(response.id).pipe(
           map((id: string) => {
             return AdminActions.removeOrderSuccess({ id: id });
+          })
+        );
+      })
+    );
+  });
+
+  //добавить обработку ошибок
+  login$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AdminActions.login),
+      mergeMap((response) => {
+        return this.AuthService.login(response.user).pipe(
+          //AuthService.login делает запрос для получения токена и записывает token и exp в localStorage
+          map((authResponse: IAuthResponse) => {
+            return AdminActions.loginSuccess({
+              token: {
+                accessToken: authResponse.accessToken,
+                expires: localStorage.getItem('token-exp'),
+              },
+            });
           })
         );
       })
