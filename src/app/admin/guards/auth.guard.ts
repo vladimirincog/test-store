@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import {
@@ -12,22 +11,17 @@ import { IToken } from 'app/store/app.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  token: Observable<IToken>;
+  token: IToken;
 
   constructor(private router: Router, private store: Store) {
-    this.token = this.store.select(AdminSelectors.token);
+    this.store
+      .select(AdminSelectors.token)
+      .subscribe((token: IToken) => (this.token = token));
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (
-      this.token.subscribe((token: IToken | null) => {
-        if (token != null) {
-          return true;
-        }
-      })
-    ) {
-      //localStorage.getItem('token')
-       return true;
+    if (this.token !== null) {
+      return true;
     } else {
       this.router.navigate(['/admin/login'], {
         queryParams: { returnUrl: state.url },

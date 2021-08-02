@@ -20,7 +20,10 @@ export const initialState: Store = {
   allProducts: new Array<IProduct>(),
   orders: new Array<IOrder>(),
   errorStatus: '',
-  token: JSON.parse(JSON.stringify(localStorage.getItem('token-exp'))) ,
+  token: {
+    accessToken: localStorage.getItem('token'),
+    expires: localStorage.getItem('token-exp'),
+  },
 };
 
 export const Reducers = createReducer(
@@ -103,7 +106,10 @@ export const Reducers = createReducer(
   on(AdminActions.loginSuccess, (state, action) => {
     return {
       ...state,
-      token: { accessToken: action.token.accessToken, expires: action.token.expires },
+      token: {
+        accessToken: action.token.accessToken,
+        expires: action.token.expires,
+      },
     };
   }),
 
