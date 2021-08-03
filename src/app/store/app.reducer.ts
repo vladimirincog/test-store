@@ -10,7 +10,7 @@ export interface Store {
   basket?: IProduct[];
   orders?: IOrder[];
   order?: IOrder;
-  token?: IToken | null;
+  token?: IToken;
   errorStatus: string;
 }
 
@@ -116,7 +116,10 @@ export const Reducers = createReducer(
   on(AdminActions.logout, (state) => {
     return {
       ...state,
-      token: null,
+      token: {
+        accessToken: null,
+        expires: null,
+      },
     };
   }),
 

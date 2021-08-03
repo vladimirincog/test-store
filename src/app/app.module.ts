@@ -37,7 +37,7 @@ const INTERESEPTOR_PROVIDER: Provider = {
     EffectsModule.forRoot([AppEffects]),
     LayoutModule,
   ],
-  providers: [INTERESEPTOR_PROVIDER],
+  providers: [INTERESEPTOR_PROVIDER], //
   bootstrap: [AppComponent],
 })
 export class AppModule {}

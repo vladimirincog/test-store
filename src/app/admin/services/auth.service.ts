@@ -1,5 +1,5 @@
 import { catchError, tap } from 'rxjs/operators';
-import { IAuthResponse } from './../../store/app.model';
+import { IAuthResponse } from '../../store/app.model';
 import { Observable, throwError, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    const { message } = error.error.error;
+    /*const { message } = error.error.error;
     switch (message) {
       case 'EMAIL_NOT_FOUND':
         this.error$.next('Такого email нет');
@@ -49,7 +49,7 @@ export class AuthService {
       case 'INVALID_PASSWORD':
         this.error$.next('Неверный пароль');
         break;
-    }
+    }*/
     //console.log(message)
     return throwError(error);
   }

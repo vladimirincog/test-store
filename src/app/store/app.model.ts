@@ -48,6 +48,6 @@ export interface IAuthResponse {
 }
 
 export interface IToken{
-  accessToken: string;
-  expires: string;
+  accessToken: string | null;
+  expires: string | null;
 }
