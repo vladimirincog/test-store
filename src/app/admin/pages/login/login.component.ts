@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.store
       .select(AdminSelectors.token)
       .subscribe((token: IToken | null) => {
-        console.log("(LoginComponent_ngOnInit) token: ", token);
+        //console.log("(LoginComponent_ngOnInit) token: ", token);
         if (token != null) {
           this.router.navigate(['/admin/dashboard']); 
         }

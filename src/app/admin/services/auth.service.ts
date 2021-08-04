@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { IUser } from 'app/store/app.model';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,7 @@ export class AuthService {
 
   login(user: IUser): Observable<IAuthResponse> {
     return this.http
-      .post<IAuthResponse>(`http://localhost:5000/login`, user)
+      .post<IAuthResponse>(`${environment.authUrl}/login`, user)
       .pipe(tap(this.setToken), catchError(this.handleError.bind(this)));
   }
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IOrder, IProduct } from 'app/store/app.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class AdminService {
 
   removeProductById(id: string): Observable<string> {
     return this.http
-      .delete<string>(`http://localhost:3000/products/${id}`)
+      .delete<string>(`${environment.apiUrl}/products/${id}`)
       .pipe(
         map((data) => {
           return id;
@@ -21,18 +22,18 @@ export class AdminService {
   }
 
   createProduct(product: IProduct): Observable<IProduct> {
-    return this.http.post<IProduct>(`http://localhost:3000/products/`, product);
+    return this.http.post<IProduct>(`${environment.apiUrl}/products/`, product);
   }
 
   updateProduct(product: IProduct): Observable<IProduct> {
     return this.http.patch<IProduct>(
-      `http://localhost:3000/products/${product.id}`,
+      `${environment.apiUrl}/products/${product.id}`,
       product
     );
   }
 
   getOrders(): Observable<IOrder[]> {
-    return this.http.get<IOrder[]>(`http://localhost:3000/orders`);
+    return this.http.get<IOrder[]>(`${environment.apiUrl}/orders`);
   }
 
   updateOrderStatus(
@@ -46,7 +47,7 @@ export class AdminService {
 
   removeOrderById(id: string): Observable<string> {
     return this.http
-      .delete<string>(`http://localhost:3000/orders/${id}`)
+      .delete<string>(`${environment.apiUrl}/orders/${id}`)
       .pipe(
         map((data) => {
           return id;

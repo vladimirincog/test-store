@@ -1,8 +1,9 @@
-import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, mergeMap} from 'rxjs/operators';
 import { ICategory, IOrder, IProduct } from 'app/store/app.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -11,27 +12,27 @@ export class AppService {
   constructor(private http: HttpClient) {}
 
   getCategory(): Observable<ICategory[]> {
-    return this.http.get<ICategory[]>('http://localhost:3000/category');
+    return this.http.get<ICategory[]>(`${environment.apiUrl}/category`);
   }
 
   getProductsByCategoryId(categoryId: string): Observable<IProduct[]> {
     const params = new HttpParams();
-    return this.http.get<IProduct[]>(`http://localhost:3000/products/`, {
+    return this.http.get<IProduct[]>(`${environment.apiUrl}/products/`, {
       params: params.set('categoryId', categoryId),
     });
   }
 
   getProductById(id: string): Observable<IProduct> {
-    return this.http.get<IProduct>(`http://localhost:3000/products/${id}`);
+    return this.http.get<IProduct>(`${environment.apiUrl}/products/${id}`);
   }
 
   getAllProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>('http://localhost:3000/products');
+    return this.http.get<IProduct[]>(`${environment.apiUrl}/products`);
   }
 
   getOrderById(id: string): Observable<IOrder> {
     return this.http
-      .get<IOrder>(`http://localhost:3000/orders/${id}`)
+      .get<IOrder>(`${environment.apiUrl}/orders/${id}`)
       .pipe(catchError(this.errorStatus));
   }
 
@@ -39,7 +40,7 @@ export class AppService {
     return this.getProductById(product.id).pipe(
       mergeMap((oldProduct: IProduct) => {
         return this.http.put<IProduct>(
-          `http://localhost:3000/products/${product.id}`,
+          `${environment.apiUrl}/products/${product.id}`,
           {
             ...product,
             pieces: (+oldProduct.pieces - +product.pieces).toString(),
@@ -53,7 +54,7 @@ export class AppService {
     return this.getProductById(product.id).pipe(
       mergeMap((oldProduct: IProduct) => {
         return this.http.put<IProduct>(
-          `http://localhost:3000/products/${product.id}`,
+          `${environment.apiUrl}/products/${product.id}`,
           {
             ...product,
             pieces: (+oldProduct.pieces + +product.pieces).toString(),
