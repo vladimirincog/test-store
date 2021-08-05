@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card>
+        <mat-card-title>Войти в панель администратора</mat-card-title>
+        <mat-card-content>
+
+            <div class="row">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Логин" formControlName="email">
+                    <mat-error *ngIf="form.controls['email'].hasError('required')">
+                        <strong>Поле логин не может быть пустым</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Пароль" formControlName="password">
+                    <mat-error *ngIf="form.get('password').touched && form.get('password').invalid">
+                        <strong *ngIf="form.get('password').errors.required">Введите пароль</strong>
+                        <strong *ngIf="form.get('password').errors.minlength">
+                            {{form.get('password').errors.minlength.requiredLength}}, сейчас длинна
+                            {{form.get('password').errors.minlength.actualLength}}</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <button mat-raised-button color="primary" type="submit" [disabled]="submitted">Войти</button>
+    </mat-card>
+</form>

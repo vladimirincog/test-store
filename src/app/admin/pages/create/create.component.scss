@@ -1,0 +1,23 @@
+form {
+  max-width: 90%;
+  margin: 3rem auto;
+  .card {
+    margin: 20px auto;
+    h2 {
+      text-align: center;
+    }
+    .row {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .col {
+      flex: 1;
+      margin-right: 20px;
+
+      .full-width {
+        width: 100%;
+      }
+    }
+  }
+}

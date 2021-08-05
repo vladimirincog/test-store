@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+mat-spinner {
+  margin: 20% auto;
+}
+
+h1.placeholder {
+  font-size: 3rem;
+  text-align: center;
+  margin: 5rem;
+  color: #c0c0c0;
+  line-height: 3.5rem;
+}
+
+p.placeholder {
+  font-size: 1rem;
+  text-align: center;
+  margin: 5rem;
+  color: #c0c0c0;
+  line-height: 3.5rem;
+}

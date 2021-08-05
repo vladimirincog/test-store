@@ -1,0 +1,57 @@
+<div class="container" *ngIf="product$ | async as product; else loading">
+
+    <mat-grid-list cols="6" rowHeight="100px">
+        <mat-grid-tile [colspan]="4" [rowspan]="1">
+            <h2>{{product.name}}</h2>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <button mat-button (click)='backUrl()'>
+                <mat-icon>arrow_back_ios</mat-icon> Назад
+            </button>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="3" [rowspan]="5">
+            <img [src]="product.img" alt="Нет изображения для товара">
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="3" [rowspan]="2">
+            <p>{{product.description}}</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="3" [rowspan]="1">
+            <h2>{{product.price | currency}}</h2>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="3" [rowspan]="1">
+            <div class="quantity" *ngIf="product.pieces > 0; else ended">
+                <button mat-raised-button (click)="decrease()" [disabled]="pieces === 1">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+
+                <input matInput [value]="pieces + ' / ' + product.pieces" readonly>
+
+                <button mat-raised-button (click)="increase()" [disabled]="pieces == +product.pieces">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </button>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="3" [rowspan]="1">
+            <button mat-raised-button color="primary" (click)="addBasket()" [disabled]="product.pieces <= 0"> В корзину
+                <mat-icon>shopping_basket
+                </mat-icon></button>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+
+</div>
+
+<ng-template #loading>
+    <mat-spinner></mat-spinner>
+</ng-template>
+
+<ng-template #ended>
+    <p class='placeholder'>Товар закончился</p>
+</ng-template>
