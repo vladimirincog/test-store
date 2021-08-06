@@ -36,11 +36,11 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     if (this.token.accessToken !== null) {
       req = req.clone({
-        setParams: {
-          auth: this.token.accessToken,
-        },
+        /* setParams: {
+          Authorization: this.token.accessToken,
+        },*/
         headers: new HttpHeaders({
-          auth: this.token.accessToken,
+          Authorization: this.token.accessToken,
         }),
       });
     }
