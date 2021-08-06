@@ -44,11 +44,12 @@ export class OrdersComponent implements OnInit {
         GlobalActions.increaseProductPieces({ product: product })
       )
     );
-
     subOrders.unsubscribe();
+    this.store.dispatch(GlobalActions.showAlert({ text: 'Товары вернулись на склад (в БД)!', delay: 1500 }));
   }
 
   removeOrder(id: string) {
     this.store.dispatch(AdminActions.removeOrder({ id: id }));
+    this.store.dispatch(GlobalActions.showAlert({ text: 'Заказ удален!', delay: 1500 }));
   }
 }

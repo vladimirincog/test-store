@@ -53,6 +53,7 @@ export class BasketComponent implements OnInit {
 
   removeProduct(id: string) {
     this.store.dispatch(UserActions.removeBasket({ id: id }));
+    this.store.dispatch(GlobalActions.showAlert({ text: 'Продукт удален из корзины!', delay: 1000 }));
   }
 
   createOrder() {
@@ -83,5 +84,6 @@ export class BasketComponent implements OnInit {
         GlobalActions.decreaseProductPieces({ product: product })
       )
     );
+    this.store.dispatch(GlobalActions.showAlert({ text: 'Заказа успешно оформлен!', delay: 2500 }));
   }
 }

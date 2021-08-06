@@ -16,6 +16,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -37,6 +39,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatBadgeModule,
     MatStepperModule,
     MatMenuModule,
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   exports: [
     MatSliderModule,
@@ -57,6 +61,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatBadgeModule,
     MatStepperModule,
     MatMenuModule,
+    MatSnackBarModule,
+    MatTooltipModule
   ],
 })
 export class MaterialModule {}

@@ -1,9 +1,9 @@
-import { AdminActions } from 'app/store/app.actions';
+import { AdminActions, GlobalActions } from 'app/store/app.actions';
 import { AdminSelectors } from 'app/store/app.selectors';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthService } from 'app/admin/services/auth.service';
 import { IAuthResponse, IToken, IUser } from 'app/store/app.model';
 
@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public router: Router,
-    public store: Store
+    public store: Store,
+    public route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -35,9 +36,27 @@ export class LoginComponent implements OnInit {
       .subscribe((token: IToken | null) => {
         //console.log("(LoginComponent_ngOnInit) token: ", token);
         if (token != null) {
-          this.router.navigate(['/admin/dashboard']); 
+          this.router.navigate(['/admin/dashboard']);
         }
       });
+
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['wrongData']) {
+        this.store.dispatch(
+          GlobalActions.showAlert({
+            text: 'Не верные данные. Ошибка: 400!',
+            delay: 2000,
+          })
+        );
+      } else if (params['tokenExpired']) {
+        this.store.dispatch(
+          GlobalActions.showAlert({
+            text: 'Сессия истекла. Введите данные заново. Ошибка: 401!',
+            delay: 2000,
+          })
+        );
+      }
+    });
   }
 
   onSubmit(): void {
@@ -52,7 +71,7 @@ export class LoginComponent implements OnInit {
         password: this.form.get('password').value,
       };
 
-      this.store.dispatch(AdminActions.login({user: user}));
+      this.store.dispatch(AdminActions.login({ user: user }));
       this.router.navigate(['/admin', 'dashboard']);
       this.submitted = false;
 

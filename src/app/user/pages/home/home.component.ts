@@ -46,7 +46,8 @@ export class HomeComponent implements OnInit {
   randomCategory() {
     this.categories$.subscribe((categories: ICategory[]) => {
       if (categories != undefined) {
-        this.category = categories[Math.floor(Math.random() * categories.length)];
+        this.category =
+          categories[Math.floor(Math.random() * categories.length)];
       }
     });
   }

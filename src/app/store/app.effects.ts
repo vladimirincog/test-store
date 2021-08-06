@@ -1,10 +1,11 @@
+import { AlertService } from 'app/shared/services/alert.service';
 import { AuthService } from 'app/admin/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AdminService } from 'app/admin/services/admin.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AppService } from 'app/shared/services/app.service';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { AdminActions, GlobalActions, UserActions } from './app.actions';
 import { UserService } from 'app/user/services/user.service';
 import { IAuthResponse, ICategory, IOrder, IProduct } from './app.model';
@@ -18,7 +19,8 @@ export class AppEffects {
     public AdminService: AdminService,
     public UserService: UserService,
     public AuthService: AuthService,
-    public store: Store
+    public store: Store,
+    public alertService: AlertService
   ) {}
 
   getCategory$ = createEffect(() => {
@@ -217,6 +219,7 @@ export class AppEffects {
         return this.AuthService.login(response.user).pipe(
           //AuthService.login делает запрос для получения токена и записывает token и exp в localStorage
           map((authResponse: IAuthResponse) => {
+            this.alertService.show('Привет!', 1000);
             return AdminActions.loginSuccess({
               token: {
                 accessToken: authResponse.accessToken,
@@ -228,4 +231,16 @@ export class AppEffects {
       })
     );
   });
+
+  searchFailEffect$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(GlobalActions.showAlert),
+        tap((response) => {
+          this.alertService.show(response.text, response.delay);
+        })
+      );
+    },
+    { dispatch: false }
+  );
 }

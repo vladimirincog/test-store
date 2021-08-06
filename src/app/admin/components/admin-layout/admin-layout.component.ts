@@ -1,5 +1,5 @@
 import { AuthService } from 'app/admin/services/auth.service';
-import { AdminActions } from 'app/store/app.actions';
+import { AdminActions, GlobalActions } from 'app/store/app.actions';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -32,6 +32,7 @@ export class AdminLayoutComponent implements OnInit {
     this.authService.logout();
     this.store.dispatch(AdminActions.logout());
     this.router.navigate(['/admin', 'login']);
+    this.store.dispatch(GlobalActions.showAlert({ text: 'Пока!', delay: 1000 }));
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver
