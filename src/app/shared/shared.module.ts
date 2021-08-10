@@ -22,10 +22,11 @@ import { CardProductComponent } from './components/product/card-product.componen
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
+    FormsModule,
     CommonModule,
     CardProductComponent,
+
     SearchPipe,
-    FormsModule,
   ],
 })
 export class SharedModule {}

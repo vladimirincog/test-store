@@ -1,7 +1,9 @@
-import { ICategory, IProduct, IOrder, IUser, IAuthResponse, IToken } from 'app/store/app.model';
+import { ICategory, IProduct, IOrder, IUser, IToken} from 'app/store/app.model';
 import { createAction, props} from '@ngrx/store';
 
 export namespace GlobalActions{
+
+  export const showAlert = createAction('SHOW_ALERT', props<{text: string, delay: number}>());
 
   export const getCategories = createAction('GET_CATEGORIES');
 

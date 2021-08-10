@@ -52,5 +52,6 @@ export class CreateComponent implements OnInit {
     this.store.dispatch(AdminActions.createProduct({ product: product }));
     formDirective.resetForm();
     this.form.reset();
+    this.store.dispatch(GlobalActions.showAlert({ text: 'Товар успешно добавлен!', delay: 1500 }));
   }
 }

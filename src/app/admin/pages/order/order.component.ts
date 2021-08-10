@@ -42,5 +42,6 @@ export class OrderComponent implements OnInit {
       AdminActions.updateOrderStatus({ id: this.orderId, status: value })
     );
     this.order$ = this.store.select(GlobalSelectors.order);
+    this.store.dispatch(GlobalActions.showAlert({ text: 'Статус изменен!', delay: 1000 }));
   }
 }

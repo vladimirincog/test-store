@@ -28,7 +28,7 @@
             </button>
             <div class="header">
                 <span>Тест-магазин</span>
-                <mat-icon [routerLink]="'/admin'" (click)="logout()" *ngIf="(token | async).accessToken != null">exit_to_app</mat-icon>
+                <mat-icon [routerLink]="'/admin'" (click)="logout()" *ngIf="(token | async).accessToken != null" matTooltip="Выход">exit_to_app</mat-icon>
             </div>
 
         </mat-toolbar>

@@ -81,6 +81,8 @@ export class EditComponent implements OnInit {
       .updateProduct(product)
       .subscribe((response: IProduct) => console.log(response));
 
-    this.router;
+    this.store.dispatch(
+      GlobalActions.showAlert({ text: 'Товар успешно изменен!', delay: 1500 })
+    );
   }
 }
