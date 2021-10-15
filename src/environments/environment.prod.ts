@@ -5,7 +5,7 @@
 };*/
 
 export const environment = {
-  production: false,
+  production: true,
   apiUrl: window["env"]["apiUrl"] || "default",
   authUrl: window["env"]["authUrl"] || "default",
   debug: window["env"]["debug"] || false
