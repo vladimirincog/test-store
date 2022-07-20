@@ -8,19 +8,22 @@ import { HomeComponent } from './pages/home/home.component';
 import { BasketComponent } from './pages/basket/basket.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { ProductComponent } from './pages/product/product.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
-const routes: Routes = [{
-  path: '',
-  component: UserLayoutComponent,
-  children: [
-    { path: '', component: HomeComponent },
-    { path: 'catalog', component: CatalogComponent },
-    { path: 'category/:id', component: CategoryComponent },
-    { path: 'product/:id', component: ProductComponent },
-    { path: 'basket', component: BasketComponent },
-    { path: '', redirectTo: '/', pathMatch: 'full' },
-  ]
-}]
+const routes: Routes = [
+  {
+    path: '',
+    component: UserLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'catalog', component: CatalogComponent },
+      { path: 'category/:id', component: CategoryComponent },
+      { path: 'product/:id', component: ProductComponent },
+      { path: 'basket', component: BasketComponent },
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+    ],
+  },
+];
 
 @NgModule({
   declarations: [
@@ -29,9 +32,10 @@ const routes: Routes = [{
     CatalogComponent,
     HomeComponent,
     CategoryComponent,
-    ProductComponent
+    ProductComponent,
+    CarouselComponent,
   ],
-  imports: [SharedModule, RouterModule.forChild(routes),],
-  exports: [RouterModule]
+  imports: [SharedModule, RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class UserModule {}

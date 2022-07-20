@@ -1,71 +1,80 @@
-    <mat-grid-list cols="4" rowHeight="50px">
+<mat-grid-list cols="4" rowHeight="50px">
 
-        <mat-grid-tile [colspan]="3" [rowspan]="1">
-            <mat-form-field appearance="fill">
-                <input matInput placeholder="Введите номер (id) заказа" [(ngModel)]="searchStr">
-            </mat-form-field>
-        </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+        <mat-form-field appearance="fill">
+            <input matInput placeholder="Введите номер (id) заказа" [(ngModel)]="searchStr">
+        </mat-form-field>
+    </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <button mat-button color="primary" [disabled]="!searchStr" (click)="findOrder()">Найти</button>
-        </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button mat-button color="primary" [disabled]="!searchStr" (click)="findOrder()">Найти</button>
+    </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="4" [rowspan]="6 + (order$ | async).products.length"
-            *ngIf="(order$ | async) != undefined && (errorStatus$ | async) == ''">
-            <mat-card class="order">
-                <mat-card-content>
-                    <h2>Заказ № {{(order$ | async).id}}</h2>
-                    <p>Статус заказа: {{(order$ | async).status}}</p>
-                    <p>Получатель: {{(order$ | async).client.firstName + ' ' + (order$ | async).client.lastName}}</p>
-                    <p>Контакты: Тел.: {{(order$ | async).client.phone}}, Email: {{(order$ | async).client.email}}</p>
-                    <p>Адрес: {{(order$ | async).client.address}}</p>
-                    <table mat-table [dataSource]="(order$ | async).products" [fixedLayout]='true'>
+    <mat-grid-tile [colspan]="4" [rowspan]="6 + (order$ | async).products.length"
+        *ngIf="(order$ | async) != undefined && (errorStatus$ | async) == ''">
+        <mat-card class="order">
+            <mat-card-content>
+                <h2>Заказ № {{(order$ | async).id}}</h2>
+                <p>Статус заказа: {{(order$ | async).status}}</p>
+                <p>Получатель: {{(order$ | async).client.firstName + ' ' + (order$ | async).client.lastName}}</p>
+                <p>Контакты: Тел.: {{(order$ | async).client.phone}}, Email: {{(order$ | async).client.email}}</p>
+                <p>Адрес: {{(order$ | async).client.address}}</p>
+                <table mat-table [dataSource]="(order$ | async).products" [fixedLayout]='true'>
 
-                        <ng-container matColumnDef="Name">
-                            <th mat-header-cell *matHeaderCellDef> Наименование </th>
-                            <td mat-cell *matCellDef="let product"> <strong
-                                    [title]="product.description">{{product.name}}</strong>
-                            </td>
-                        </ng-container>
+                    <ng-container matColumnDef="Name">
+                        <th mat-header-cell *matHeaderCellDef> Наименование </th>
+                        <td mat-cell *matCellDef="let product"> <strong
+                                [title]="product.description">{{product.name}}</strong>
+                        </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="Img">
-                            <th mat-header-cell *matHeaderCellDef> Изображение </th>
-                            <td mat-cell *matCellDef="let product"> <img [src]="product.img"> </td>
-                        </ng-container>
+                    <ng-container matColumnDef="Img">
+                        <th mat-header-cell *matHeaderCellDef> Изображение </th>
+                        <td mat-cell *matCellDef="let product"> <img [src]="product.img"> </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="Price">
-                            <th mat-header-cell *matHeaderCellDef> Цена </th>
-                            <td mat-cell *matCellDef="let product"> {{product.price | currency}} </td>
-                        </ng-container>
+                    <ng-container matColumnDef="Price">
+                        <th mat-header-cell *matHeaderCellDef> Цена </th>
+                        <td mat-cell *matCellDef="let product"> {{product.price | currency}} </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="Pieces">
-                            <th mat-header-cell *matHeaderCellDef class='small'> Кол-во </th>
-                            <td mat-cell *matCellDef="let product" class='small'> {{product.pieces}} </td>
-                        </ng-container>
+                    <ng-container matColumnDef="Pieces">
+                        <th mat-header-cell *matHeaderCellDef class='small'> Кол-во </th>
+                        <td mat-cell *matCellDef="let product" class='small'> {{product.pieces}} </td>
+                    </ng-container>
 
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                </mat-card-content>
-            </mat-card>
-        </mat-grid-tile>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="4" [rowspan]="breakpoint.isMobile() ? 2 : 1" *ngIf="(errorStatus$ | async) != ''">
-            <mat-card>
-                <p class="danger">Заказ не найден, попробуйте снова или свяжитесь с тест-менеджером</p>
-            </mat-card>
-        </mat-grid-tile>
+    <mat-grid-tile [colspan]="4" [rowspan]="breakpoint.isMobile() ? 2 : 1" *ngIf="(errorStatus$ | async) != ''">
+        <mat-card>
+            <p class="danger">Заказ не найден, попробуйте снова или свяжитесь с тест-менеджером</p>
+        </mat-card>
+    </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="breakpoint.isMobile() ? 4 : 2" [rowspan]="4">
-            <mat-card *ngIf="category !== undefined" [routerLink]="['/', 'category', category.id]">
-                <button mat-button color="primary" class="long" [routerLink]="'catalog'">Лучшие {{ category.name |
-                    lowercase}}</button>
-            </mat-card>
-        </mat-grid-tile>
+    <mat-grid-tile [colspan]="breakpoint.isMobile() ? 4 : 2" [rowspan]="4">
+        <mat-card *ngIf="category !== undefined else categoriesNotLoaded" [routerLink]="['/', 'category', category.id]">
+            <button mat-button color="primary" class="long" [routerLink]="'catalog'">Лучшие {{ category.name |
+                lowercase}}</button>
+        </mat-card>
+    </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="breakpoint.isMobile() ? 4 : 2" [rowspan]="4">
-            <mat-card>
-                <button mat-button color="primary" class="long" [routerLink]="'catalog'">Перейти в каталог</button>
-            </mat-card>
-        </mat-grid-tile>
-    </mat-grid-list>
+    <mat-grid-tile [colspan]="breakpoint.isMobile() ? 4 : 2" [rowspan]="4">
+        <mat-card>
+            <button mat-button color="primary" class="long" [routerLink]="'catalog'">Перейти в каталог</button>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<app-carousel></app-carousel>
+
+<ng-template #categoriesNotLoaded>
+    <mat-card>
+        <p class="warning placeholder">Список категорий не был получен с сервера.</p>
+        <p class="warning placeholder">В этом блоке не получилось отобразить случайную категорию товаров.</p>
+    </mat-card>
+</ng-template>

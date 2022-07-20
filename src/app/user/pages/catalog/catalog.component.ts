@@ -12,7 +12,7 @@ import { BreakpointService } from 'app/shared/services/breakpoint.service';
   styleUrls: ['./catalog.component.scss'],
 })
 export class CatalogComponent implements OnInit {
-  categories$: Observable<ICategory[]>;
+  categories$: Observable<ICategory[]> = undefined;
   searchStr: string;
 
   constructor(private store: Store, public breakpoint: BreakpointService) {}

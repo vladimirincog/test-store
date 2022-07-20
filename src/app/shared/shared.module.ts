@@ -25,7 +25,6 @@ import { CardProductComponent } from './components/product/card-product.componen
     FormsModule,
     CommonModule,
     CardProductComponent,
-
     SearchPipe,
   ],
 })
