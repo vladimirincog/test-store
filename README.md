@@ -1,27 +1,94 @@
-# TestStore
+=====================================================ENDPOINTS=======================================================
+------------------------------------------------------Product--------------------------------------------------------
+*img - не обязательное поле
+*id - генерирует backend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
+IProduct {
+  id?: string;
+  categoryId: string;
+  img?: string;
+  name: string;
+  description: string;
+  pieces: number;
+  price: number;
+}
 
-## Development server
+api/products GET
+api/products POST
+api/products/id GET
+api/products/id PUT
+api/products/id PATCH 
+api/products/id DELETE
+api/products?categoryId=1 GET
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+------------------------------------------------------Category-------------------------------------------------------
+*img - не обязательное поле
+*id - генерирует backend
 
-## Code scaffolding
+ICategory {
+  id?: string;
+  img?: string;
+  name: string;
+  description: string;
+}
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+api/category GET
 
-## Build
+---------------------------------------------------------Order-------------------------------------------------------
+*email - не обязательное поле
+*id - генерирует backend
+**id - только у заказа, у клиента id нет. Client не существует без Order.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+IClient {	<----------------
+  firstName: string;		|
+  lastName: string;		|
+  address: string;		|
+  phone: string;		|
+  email?: string;		|
+}				|
+				|
+IOrder {			|
+  id?: string;			|
+  products: IProduct[];		|
+  client: IClient;	________|
+  status: 'обрабатывается' | 'подтвержден' | 'выполнен' | 'отменен';
+}
 
-## Running unit tests
+api/orders GET
+api/orders POST
+api/orders/id GET
+api/orders/id PATCH (status: 'обрабатывается' | 'подтвержден' | 'выполнен' | 'отменен')
+api/orders/id DELETE
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+--------------------------------------------------------User(admin)--------------------------------------------------
 
-## Running end-to-end tests
+IUser {
+  email: string;
+  password: string;
+}
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+authApi/login POST
 
-## Further help
+IAuthResponse {
+  accessToken: string;
+  user: {
+    email: string;
+    id: number;
+}
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+---------------------------------------------------------------------------------------------------------------------
+
+*Если User(администратор) авторизовался, Frontend добавляет accessToken в заголовке auth к каждому запросу. 
+
+=========================================================DOCKER======================================================
+
+1) Сборка образа
+docker build . -t test-store
+
+2) Запуск контейнера 
+docker run -d -p 8080:80 --env API_URL=http://localhost:3000 --env AUTH_URL=http://localhost:5000 test-store:latest
+
+* API_URL=адрес_API_сервиса 
+* AUTH_URL=адрес_AUTH_сервиса
+* http://localhost:8080/
+=====================================================================================================================
